@@ -1,0 +1,40 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: RobotoRegular;
+  color: var(--white);
+}
+
+@font-face {
+  font-family: RobotoRegular;
+  src: url(./assets/fonts/Roboto-Regular.ttf);
+}
+
+@font-face {
+  font-family: RobotoMedium;
+  src: url(./assets/fonts/Roboto-Medium.ttf);
+}
+
+body {
+  background-image: url(../src/assets/images/background.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  min-height: 100vh;
+  margin: 0 10%;
+  /* overflow: hidden; */
+}
+
+:root {
+  --white: #ffffff;
+  --yellow: #ffd639;
+  --red: #e32843;
+  --blueGrey: #75889f;
+  --purple: rgba(136, 81, 204, 0.68);
+  --grey: rgba(255, 255, 255, 0.184);
+}
+
+.App {
+  min-height: 100vh;
+}
