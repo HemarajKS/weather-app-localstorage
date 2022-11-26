@@ -11,6 +11,7 @@ import { getweather } from '../../redux/reducers/weatherSlice';
 const Recent = () => {
   const dispatch = useDispatch();
   const recentData = useSelector((state: any) => state.recent.value);
+  const tempUnit = useSelector((state: any) => state.tempUnit.value);
 
   console.log('recent data', recentData);
 
@@ -50,7 +51,7 @@ const Recent = () => {
                 Clear All
               </div>
             </div>
-            {recentData.map((key: any, i: any) => {
+            {recentData.reverse().map((key: any, i: any) => {
               let x = false;
 
               return (
@@ -69,10 +70,23 @@ const Recent = () => {
                         <img src={key.current.condition.icon} alt="sunny" />
                       </div>
                       <div className="favTemp">
-                        {key.temp_c && key.temp_c.toFixed(0)}{' '}
-                        <span>{'\u00B0'}C</span>
+                        {!tempUnit ? (
+                          <>
+                            {key.current.temp_c &&
+                              key.current.temp_c.toFixed(0)}{' '}
+                            <span>{'\u00B0'}C</span>
+                          </>
+                        ) : (
+                          <>
+                            {key.current.temp_f &&
+                              key.current.temp_f.toFixed(0)}{' '}
+                            <span>{'\u00B0'}F</span>
+                          </>
+                        )}
                       </div>
-                      <div className="favCond">{key.condition}</div>
+                      <div className="favCond">
+                        {key.current.condition.text}
+                      </div>
                     </div>
                   </div>
                   <div
