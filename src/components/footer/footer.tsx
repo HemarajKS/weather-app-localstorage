@@ -64,8 +64,8 @@ const Footer = () => {
                 weather.data &&
                 weather.data.data &&
                 weather.data.data.current &&
-                weather.data.data.current.precip_mm}
-              %
+                weather.data.data.current.precip_mm}{' '}
+              mm
             </div>
           </div>
         </div>

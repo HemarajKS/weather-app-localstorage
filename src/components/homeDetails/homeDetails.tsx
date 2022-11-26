@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Switch from 'react-switch';
+import { favouriteAdd } from '../../redux/reducers/favSlice';
 import { temp } from '../../redux/reducers/tempUnit';
 
 import './homeDetails.css';
@@ -70,7 +71,7 @@ const HomeDetails = () => {
                 }
                 {
                   <>
-                    {true ? (
+                    {false ? (
                       <div className="homePageFav" onClick={() => {}}>
                         <div className="homePageFavIcon">
                           <img
@@ -87,7 +88,12 @@ const HomeDetails = () => {
                         </div>
                       </div>
                     ) : (
-                      <div className="homePageFav" onClick={() => {}}>
+                      <div
+                        className="homePageFav"
+                        onClick={() => {
+                          dispatch(favouriteAdd(weather.data.data));
+                        }}
+                      >
                         <div className="homePageFavIcon">
                           <img
                             src={require(`../../assets/icons/icon_favourite.png`)}

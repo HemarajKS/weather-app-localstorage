@@ -4,11 +4,15 @@ import '../../components/Favourites/favpourites.css';
 import Modal from 'react-modal';
 
 import { useLocation, useNavigate } from 'react-router-dom';
+import { favdelAll } from '../../redux/reducers/favSlice';
 
 const Favourites = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
+
+  const favData = useSelector((state: any) => state.fav.value);
+  const tempUnit = useSelector((state: any) => state.tempUnit.value);
 
   const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -20,55 +24,70 @@ const Favourites = () => {
     setIsOpen(false);
   }
 
-  let fav: any = {};
-
   return (
     <>
       <div className="mobileHeader">Favourite</div>
-      {false ? (
-        <div className="favourites">
+      {favData && favData.length > 0 ? (
+        <>
           <div className="favouritesHeader">
-            <div className="favouritesLength">6 City added as favourite</div>
+            <div className="favouritesLength">
+              {favData.length} {favData.length === 1 ? 'city' : 'cities'} added
+              as favourite
+            </div>
             <div className="favouritesRemoveAll" onClick={openModal}>
-              Remove All
+              Clear All
             </div>
           </div>
-          {[].map((key: any, i: any) => {
-            return (
-              <div className="favouritesBody" key={i}>
-                <div className="favouritesBodyDown">
-                  <div
-                    className="favPlace"
-                    onClick={() => {
-                      navigate('/');
-                    }}
-                  >
-                    {fav.data[key].place && fav.data[key].place},{' '}
-                    {fav.data[key].region && fav.data[key].region}
+          <div className="favourites">
+            {favData.map((key: any, i: any) => {
+              return (
+                <div className="favouritesBody" key={i}>
+                  <div className="favouritesBodyDown">
+                    <div
+                      className="favPlace"
+                      onClick={() => {
+                        navigate('/');
+                      }}
+                    >
+                      {key.location.name && key.location.name},{' '}
+                      {key.location.region && key.location.region}
+                    </div>
+                    <div className="favouritebodyDownLower">
+                      <div className="favIcon">
+                        <img src={key.current.condition.icon} alt="sunny" />
+                      </div>
+                      <div className="favTemp">
+                        {!tempUnit ? (
+                          <>
+                            {key.current.temp_c &&
+                              key.current.temp_c.toFixed(0)}{' '}
+                            <span>{'\u00B0'}C</span>
+                          </>
+                        ) : (
+                          <>
+                            {key.current.temp_f &&
+                              key.current.temp_f.toFixed(0)}{' '}
+                            <span>{'\u00B0'}F</span>
+                          </>
+                        )}
+                      </div>
+                      <div className="favCond">
+                        {key.current.condition.text &&
+                          key.current.condition.text}
+                      </div>
+                    </div>
                   </div>
-                  <div className="favouritebodyDownLower">
-                    <div className="favIcon">
-                      <img src={fav.data[key].icon} alt="sunny" />
-                    </div>
-                    <div className="favTemp">
-                      {fav.data[key].temp_c && fav.data[key].temp_c.toFixed(0)}{' '}
-                      <span>{'\u00B0'}C</span>
-                    </div>
-                    <div className="favCond">
-                      {fav.data[key].condition && fav.data[key].condition}
-                    </div>
+                  <div className="favLike" onClick={() => {}}>
+                    <img
+                      src={require('../../assets/icons/icon_favourite_Active.png')}
+                      alt="fav"
+                    />
                   </div>
                 </div>
-                <div className="favLike" onClick={() => {}}>
-                  <img
-                    src={require('../../assets/icons/icon_favourite_Active.png')}
-                    alt="fav"
-                  />
-                </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        </>
       ) : (
         <div className="noFavAdded">
           <img
@@ -92,7 +111,15 @@ const Favourites = () => {
             <button className="modalBtnNo" onClick={closeModal}>
               No
             </button>
-            <button className="modalBtnYes">Yes</button>
+            <button
+              className="modalBtnYes"
+              onClick={() => {
+                dispatch(favdelAll());
+                closeModal();
+              }}
+            >
+              Yes
+            </button>
           </div>
         </div>
       </Modal>
