@@ -8,7 +8,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { getweather } from '../../redux/reducers/weatherSlice';
 import { recentDel } from '../../redux/reducers/recentSlice';
-import { favouriteAdd } from '../../redux/reducers/favSlice';
+import { favouriteAdd, favouriteDel } from '../../redux/reducers/favSlice';
 
 const Recent = () => {
   const dispatch = useDispatch();
@@ -56,7 +56,8 @@ const Recent = () => {
           <div className="favourites">
             {recentData.map((key: any, i: any) => {
               let x = false;
-              favData.some((ele: any, i: any) => {
+              let index: any = null;
+              favData.some((ele: any, indexFav: any) => {
                 console.log('ele', ele);
                 if (
                   ele.location.name === (key && key.location.name) &&
@@ -64,6 +65,7 @@ const Recent = () => {
                   ele.location.lon === (key && key.location.lon)
                 ) {
                   x = true;
+                  index = indexFav;
                 }
               });
 
@@ -105,17 +107,14 @@ const Recent = () => {
                       </div>
                     </div>
                   </div>
-                  <div
-                    className="favLike"
-                    onClick={() => {
-                      // deleteFav(ele.id);
-                    }}
-                  >
+                  <div className="favLike">
                     {x ? (
                       <img
                         src={require('../../assets/icons/icon_favourite_Active.png')}
                         alt="fav"
-                        onClick={() => {}}
+                        onClick={() => {
+                          dispatch(favouriteDel(index));
+                        }}
                       />
                     ) : (
                       <img
