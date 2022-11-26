@@ -7,9 +7,12 @@ import { temp } from '../../redux/reducers/tempUnit';
 import './homeDetails.css';
 
 const HomeDetails = () => {
+  const [liked, setLiked] = useState(false);
+
   const dispatch = useDispatch();
   const weather = useSelector((state: any) => state.weather);
   const tempUnit = useSelector((state: any) => state.tempUnit.value);
+  const favData = useSelector((state: any) => state.fav.value);
 
   const handleChange = (nextChecked: boolean) => {
     dispatch(temp(nextChecked));
@@ -26,6 +29,40 @@ const HomeDetails = () => {
       clearInterval(timerId);
     };
   }, []);
+
+  useEffect(() => {
+    console.log('fav', favData, weather.data.data);
+    let arr: any = [];
+
+    favData.some((ele: any, i: any) => {
+      console.log('ele', ele);
+      if (
+        ele.location.name ===
+          (weather &&
+            weather.data &&
+            weather.data.data &&
+            weather.data.data.location.name) &&
+        ele.location.lat ===
+          (weather &&
+            weather.data &&
+            weather.data.data &&
+            weather.data.data.location.lat) &&
+        ele.location.lon ===
+          (weather &&
+            weather.data &&
+            weather.data.data &&
+            weather.data.data.location.lon)
+      ) {
+        arr.push('exist');
+      }
+    });
+
+    if (arr.includes('exist')) {
+      setLiked(true);
+    } else {
+      setLiked(false);
+    }
+  }, [favData, weather]);
 
   return (
     <div className="homeBodyContainer">
@@ -71,7 +108,7 @@ const HomeDetails = () => {
                 }
                 {
                   <>
-                    {false ? (
+                    {liked ? (
                       <div className="homePageFav" onClick={() => {}}>
                         <div className="homePageFavIcon">
                           <img
