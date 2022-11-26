@@ -40,7 +40,7 @@ const Header = () => {
           `${weather.data.data.location.lat},${weather.data.data.location.lon}`
         )
       );
-  }, [weather]);
+  }, [weather && weather.data]);
 
   useEffect(() => {
     const options = {
