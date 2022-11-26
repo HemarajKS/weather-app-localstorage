@@ -10,6 +10,9 @@ import { getweather } from '../../redux/reducers/weatherSlice';
 
 const Recent = () => {
   const dispatch = useDispatch();
+  const recentData = useSelector((state: any) => state.recent.value);
+
+  console.log('recent data', recentData);
 
   useEffect(() => {
     const recentData = JSON.parse(localStorage.getItem('recent') || '[]');
@@ -38,7 +41,7 @@ const Recent = () => {
   return (
     <>
       <div className="mobileHeader">Recent Search</div>
-      {false ? (
+      {recentData && recentData.length > 0 ? (
         <>
           <div className="favourites">
             <div className="favouritesHeader">
@@ -47,7 +50,7 @@ const Recent = () => {
                 Clear All
               </div>
             </div>
-            {[].map((key: any, i: any) => {
+            {recentData.map((key: any, i: any) => {
               let x = false;
 
               return (
@@ -59,11 +62,11 @@ const Recent = () => {
                         navigate('/');
                       }}
                     >
-                      {key.place}, {key.region}
+                      {key.location.name}, {key.location.region}
                     </div>
                     <div className="favouritebodyDownLower">
                       <div className="favIcon">
-                        <img src={key.icon} alt="sunny" />
+                        <img src={key.current.condition.icon} alt="sunny" />
                       </div>
                       <div className="favTemp">
                         {key.temp_c && key.temp_c.toFixed(0)}{' '}

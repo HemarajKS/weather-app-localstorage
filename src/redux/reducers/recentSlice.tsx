@@ -9,9 +9,8 @@ export const recentSlice = createSlice({
   initialState,
   reducers: {
     recentAdd: (state, action) => {
-      console.log('recentAdd', action.payload);
       let recentData = JSON.parse(localStorage.getItem('recent') || '[]');
-      console.log('recentData', recentData);
+
       let arr: any = [];
       let index: any = null;
       recentData.some((ele: any, i: any) => {
@@ -32,17 +31,15 @@ export const recentSlice = createSlice({
         const toIndex = recentData.length;
 
         const element = recentData.splice(fromIndex, 1)[0];
-        console.log(element);
 
         recentData.splice(toIndex, 0, element);
 
-        console.log(recentData);
         localStorage.setItem('recent', JSON.stringify(recentData));
       } else {
         recentData.push(action.payload);
         localStorage.setItem('recent', JSON.stringify(recentData));
       }
-      console.log('recentAdd data', recentData);
+      state.value = JSON.parse(localStorage.getItem('recent') || '[]');
     },
     recentDel: (state, action) => {
       console.log('recentDel', action.payload);
