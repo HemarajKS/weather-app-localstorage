@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { NavLink, useLocation } from 'react-router-dom';
 import { getweather } from '../../redux/reducers/weatherSlice';
+import { currentData } from '../../redux/reducers/currentWeatherSlice';
+import { getLocation } from '../../redux/reducers/locationAuto';
 
 const Header = () => {
   const [showAutoComplete, setShowAutoComplete] = useState(false);
@@ -12,27 +14,19 @@ const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   const dispatch = useDispatch();
-
   const currPath = useLocation();
 
-  // const data: any = weather &&
-  //   weather.data &&
-  //   weather.data.data && {
-  //     id: `${weather.data.data.location.lat},${weather.data.data.location.lon}`,
-  //     place: weather.data.data.location.name,
-  //     region: weather.data.data.location.region,
-  //     icon: `${weather.data.data.current.condition.icon}`,
-  //     temp_f: weather.data.data.current.temp_f,
-  //     temp_c: weather.data.data.current.temp_c,
-  //     condition: weather.data.data.current.condition.text,
-  //     temp_min: weather.data.data.current.temp_f - 2,
-  //     temp_max: weather.data.data.current.temp_f + 2,
-  //     precep: weather.data.data.current.precip_in,
-  //     humidity: weather.data.data.current.humidity,
-  //     wind: weather.data.data.current.wind_mph,
-  //     visibility: weather.data.data.current.vis_miles,
-  //     fav: false,
-  //   };
+  const weather = useSelector((state: any) => state.weather);
+  const locationSuggestion = useSelector((state: any) => state.location);
+
+  useEffect(() => {
+    const location = JSON.parse(localStorage.getItem('location') || '"udupi"');
+    dispatch(getweather(location));
+  }, []);
+
+  useEffect(() => {
+    dispatch(currentData(weather.data));
+  }, [weather]);
 
   const submitHandler = (e: any) => {
     e.preventDefault();
@@ -42,7 +36,12 @@ const Header = () => {
 
   const onChangeHandler = (term: string) => {
     setSearchValue(term);
+    dispatch(getLocation(term));
   };
+
+  useEffect(() => {
+    console.log('location', locationSuggestion);
+  });
 
   return (
     <div className="header">
@@ -98,7 +97,9 @@ const Header = () => {
         />
         <div className="headerAutoComplete">
           {showAutoComplete &&
-            [].map(
+            locationSuggestion &&
+            locationSuggestion.data &&
+            locationSuggestion.data.data.map(
               (
                 ele: { name: string; region: string; lat: number; lon: number },
                 i: number

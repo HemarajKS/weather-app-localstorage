@@ -6,6 +6,8 @@ import './homeDetails.css';
 
 const HomeDetails = () => {
   const dispatch = useDispatch();
+  const weather = useSelector((state: any) => state.weather);
+
   const [checked, setChecked] = useState(true);
 
   const handleChange = (nextChecked: boolean) => {
@@ -23,6 +25,10 @@ const HomeDetails = () => {
       clearInterval(timerId);
     };
   }, []);
+
+  useEffect(() => {
+    console.log('current weather', weather);
+  }, [weather]);
 
   return (
     <div className="homeBodyContainer">
