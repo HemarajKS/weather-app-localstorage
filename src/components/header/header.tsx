@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './header.css';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { getweather } from '../../redux/reducers/weatherSlice';
 import { currentData } from '../../redux/reducers/currentWeatherSlice';
 import { getLocation } from '../../redux/reducers/locationAuto';
@@ -15,6 +15,7 @@ const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [submit, setSubmit] = useState(false);
 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const currPath = useLocation();
 
@@ -76,12 +77,13 @@ const Header = () => {
   const submitHandler: any = (e: any) => {
     e.preventDefault();
     dispatch(showSugg(false));
+    mobilesearch && navigate('/');
     if (e.target.search.value.length > 0) {
       dispatch(getweather(e.target.search.value));
     } else {
       alert('Enter place name in search field before submitting ');
     }
-
+    setMobileSearch(false);
     setSubmit(true);
   };
 
@@ -166,8 +168,9 @@ const Header = () => {
                     localStorage.setItem('location', `${ele.lat},${ele.lon}`);
                     setSearchValue(ele.name);
                     dispatch(showSugg(false));
-
                     setSubmit(true);
+                    mobilesearch && navigate('/');
+                    setMobileSearch(false);
                   }}
                 >
                   {ele.name}, {ele.region}
