@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Switch from 'react-switch';
+import { temp } from '../../redux/reducers/tempUnit';
 
 import './homeDetails.css';
 
 const HomeDetails = () => {
   const dispatch = useDispatch();
   const weather = useSelector((state: any) => state.weather);
+  const tempUnit = useSelector((state: any) => state.tempUnit.value);
 
   const [checked, setChecked] = useState(true);
 
   const handleChange = (nextChecked: boolean) => {
-    setChecked(nextChecked);
+    dispatch(temp(nextChecked));
   };
 
   const [date, setDate] = useState(new Date());
@@ -53,9 +55,23 @@ const HomeDetails = () => {
             })}
           </span>
         </div>
-        {true ? (
+        {weather && !weather.isLoading ? (
           <>
-            {<div className="homePagePlace">Bailur, Karkala</div>}
+            {
+              <div className="homePagePlace">
+                {weather &&
+                  weather.data &&
+                  weather.data.data &&
+                  weather.data.data.location &&
+                  weather.data.data.location.name}
+                ,{' '}
+                {weather &&
+                  weather.data &&
+                  weather.data.data &&
+                  weather.data.data.location &&
+                  weather.data.data.location.region}
+              </div>
+            }
             {
               <>
                 {true ? (
@@ -91,7 +107,13 @@ const HomeDetails = () => {
               <div className="homePageWeather">
                 <div className="homePageWeatherIcon">
                   <img
-                    src="icon"
+                    src={
+                      weather &&
+                      weather.data &&
+                      weather.data.data &&
+                      weather.data.data.current &&
+                      weather.data.data.current.condition.icon
+                    }
                     alt="Weather"
                     className="homePageWeatherIcon"
                   />
@@ -99,13 +121,24 @@ const HomeDetails = () => {
                 <div className="homePageWeatherTemperature">
                   <div className="homePageWeatherTemp">
                     {' '}
-                    {checked ? 0 + '\u00B0' : 0 + '\u00B0'}{' '}
+                    {tempUnit
+                      ? weather &&
+                        weather.data &&
+                        weather.data.data &&
+                        weather.data.data.current &&
+                        weather.data.data.current.temp_f.toFixed(0) + '\u00B0'
+                      : weather &&
+                        weather.data &&
+                        weather.data.data &&
+                        weather.data.data.current &&
+                        weather.data.data.current.temp_c.toFixed(0) +
+                          '\u00B0'}{' '}
                   </div>
                   <div className="homePageWeatherUnit">
                     <Switch
                       borderRadius={4}
                       onChange={handleChange}
-                      checked={checked}
+                      checked={tempUnit}
                       className="react-switch"
                       offColor="transparent"
                       onColor="transparent"
@@ -171,7 +204,13 @@ const HomeDetails = () => {
                     />
                   </div>
                 </div>
-                <div className="homePageWeatherText">Sunny</div>
+                <div className="homePageWeatherText">
+                  {weather &&
+                    weather.data &&
+                    weather.data.data &&
+                    weather.data.data.current &&
+                    weather.data.data.current.condition.text}
+                </div>
               </div>
             }
           </>
