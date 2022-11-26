@@ -53,118 +53,131 @@ const HomeDetails = () => {
             })}
           </span>
         </div>
-        {<div className="homePagePlace">Bailur, Karkala</div>}
-        {
+        {true ? (
           <>
-            {true ? (
-              <div className="homePageFav" onClick={() => {}}>
-                <div className="homePageFavIcon">
+            {<div className="homePagePlace">Bailur, Karkala</div>}
+            {
+              <>
+                {true ? (
+                  <div className="homePageFav" onClick={() => {}}>
+                    <div className="homePageFavIcon">
+                      <img
+                        src={require('../../assets/icons/icon_favourite_Active.png')}
+                        alt="Favourite"
+                        width={25}
+                      />
+                    </div>
+                    <div
+                      className="homePageFavText"
+                      style={{ color: '#FAD05B' }}
+                    >
+                      Added to favourite
+                    </div>
+                  </div>
+                ) : (
+                  <div className="homePageFav" onClick={() => {}}>
+                    <div className="homePageFavIcon">
+                      <img
+                        src={require(`../../assets/icons/icon_favourite.png`)}
+                        alt="Favourite"
+                      />
+                    </div>
+                    <div className="homePageFavText">Add to favourite</div>
+                  </div>
+                )}
+              </>
+            }
+            {
+              <div className="homePageWeather">
+                <div className="homePageWeatherIcon">
                   <img
-                    src={require('../../assets/icons/icon_favourite_Active.png')}
-                    alt="Favourite"
-                    width={25}
+                    src="icon"
+                    alt="Weather"
+                    className="homePageWeatherIcon"
                   />
                 </div>
-                <div className="homePageFavText" style={{ color: '#FAD05B' }}>
-                  Added to favourite
+                <div className="homePageWeatherTemperature">
+                  <div className="homePageWeatherTemp">
+                    {' '}
+                    {checked ? 0 + '\u00B0' : 0 + '\u00B0'}{' '}
+                  </div>
+                  <div className="homePageWeatherUnit">
+                    <Switch
+                      borderRadius={4}
+                      onChange={handleChange}
+                      checked={checked}
+                      className="react-switch"
+                      offColor="transparent"
+                      onColor="transparent"
+                      uncheckedHandleIcon={
+                        <div
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            height: '100%',
+                            fontSize: 18,
+                            color: 'red',
+                          }}
+                        >
+                          {'\u00B0'}C
+                        </div>
+                      }
+                      uncheckedIcon={
+                        <div
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            height: '100%',
+                            fontSize: 18,
+                            paddingRight: 2,
+                            color: 'white',
+                            zIndex: '2',
+                          }}
+                        >
+                          {'\u00B0'}F
+                        </div>
+                      }
+                      checkedIcon={
+                        <div
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            height: '100%',
+                            fontSize: 18,
+                            paddingRight: 2,
+                            color: 'white',
+                          }}
+                        >
+                          {'\u00B0'}C
+                        </div>
+                      }
+                      checkedHandleIcon={
+                        <div
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            height: '100%',
+                            color: 'red',
+                            fontSize: 18,
+                          }}
+                        >
+                          {'\u00B0'}F
+                        </div>
+                      }
+                    />
+                  </div>
                 </div>
+                <div className="homePageWeatherText">Sunny</div>
               </div>
-            ) : (
-              <div className="homePageFav" onClick={() => {}}>
-                <div className="homePageFavIcon">
-                  <img
-                    src={require(`../../assets/icons/icon_favourite.png`)}
-                    alt="Favourite"
-                  />
-                </div>
-                <div className="homePageFavText">Add to favourite</div>
-              </div>
-            )}
+            }
           </>
-        }
-        {
-          <div className="homePageWeather">
-            <div className="homePageWeatherIcon">
-              <img src="icon" alt="Weather" className="homePageWeatherIcon" />
-            </div>
-            <div className="homePageWeatherTemperature">
-              <div className="homePageWeatherTemp">
-                {' '}
-                {checked ? 0 + '\u00B0' : 0 + '\u00B0'}{' '}
-              </div>
-              <div className="homePageWeatherUnit">
-                <Switch
-                  borderRadius={4}
-                  onChange={handleChange}
-                  checked={checked}
-                  className="react-switch"
-                  offColor="transparent"
-                  onColor="transparent"
-                  uncheckedHandleIcon={
-                    <div
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        height: '100%',
-                        fontSize: 18,
-                        color: 'red',
-                      }}
-                    >
-                      {'\u00B0'}C
-                    </div>
-                  }
-                  uncheckedIcon={
-                    <div
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        height: '100%',
-                        fontSize: 18,
-                        paddingRight: 2,
-                        color: 'white',
-                        zIndex: '2',
-                      }}
-                    >
-                      {'\u00B0'}F
-                    </div>
-                  }
-                  checkedIcon={
-                    <div
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        height: '100%',
-                        fontSize: 18,
-                        paddingRight: 2,
-                        color: 'white',
-                      }}
-                    >
-                      {'\u00B0'}C
-                    </div>
-                  }
-                  checkedHandleIcon={
-                    <div
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        height: '100%',
-                        color: 'red',
-                        fontSize: 18,
-                      }}
-                    >
-                      {'\u00B0'}F
-                    </div>
-                  }
-                />
-              </div>
-            </div>
-            <div className="homePageWeatherText">Sunny</div>
-          </div>
-        }
+        ) : (
+          'loading'
+        )}
       </div>
     </div>
   );

@@ -99,6 +99,7 @@ const Header = () => {
           {showAutoComplete &&
             locationSuggestion &&
             locationSuggestion.data &&
+            locationSuggestion.data.data &&
             locationSuggestion.data.data.map(
               (
                 ele: { name: string; region: string; lat: number; lon: number },
