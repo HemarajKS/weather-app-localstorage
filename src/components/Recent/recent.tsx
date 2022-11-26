@@ -60,6 +60,9 @@ const Recent = () => {
                     <div
                       className="favPlace"
                       onClick={() => {
+                        dispatch(
+                          getweather(`${key.location.lat},${key.location.lon}`)
+                        );
                         navigate('/');
                       }}
                     >

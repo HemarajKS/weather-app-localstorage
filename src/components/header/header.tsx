@@ -38,6 +38,7 @@ const Header = () => {
       );
 
     submit && weather.data && dispatch(recentAdd(weather.data.data));
+    setSubmit(false);
   }, [weather && weather.data]);
 
   useEffect(() => {
