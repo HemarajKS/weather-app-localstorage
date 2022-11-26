@@ -13,6 +13,7 @@ import { favouriteAdd } from '../../redux/reducers/favSlice';
 const Recent = () => {
   const dispatch = useDispatch();
   const recentData = useSelector((state: any) => state.recent.value);
+  const favData = useSelector((state: any) => state.fav.value);
   const tempUnit = useSelector((state: any) => state.tempUnit.value);
 
   console.log('recent data', recentData);
@@ -55,6 +56,16 @@ const Recent = () => {
           <div className="favourites">
             {recentData.map((key: any, i: any) => {
               let x = false;
+              favData.some((ele: any, i: any) => {
+                console.log('ele', ele);
+                if (
+                  ele.location.name === (key && key.location.name) &&
+                  ele.location.lat === (key && key.location.lat) &&
+                  ele.location.lon === (key && key.location.lon)
+                ) {
+                  x = true;
+                }
+              });
 
               return (
                 <div className="favouritesBody" key={i}>
