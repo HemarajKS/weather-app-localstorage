@@ -44,14 +44,14 @@ const Recent = () => {
       <div className="mobileHeader">Recent Search</div>
       {recentData && recentData.length > 0 ? (
         <>
-          <div className="favourites">
-            <div className="favouritesHeader">
-              <div className="favouritesLength">You recently searched for</div>
-              <div className="favouritesRemoveAll" onClick={openModal}>
-                Clear All
-              </div>
+          <div className="favouritesHeader">
+            <div className="favouritesLength">You recently searched for</div>
+            <div className="favouritesRemoveAll" onClick={openModal}>
+              Clear All
             </div>
-            {recentData.reverse().map((key: any, i: any) => {
+          </div>
+          <div className="favourites">
+            {recentData.map((key: any, i: any) => {
               let x = false;
 
               return (

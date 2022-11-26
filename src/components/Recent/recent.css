@@ -1,236 +1,236 @@
 .favourites {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    /* overflow: auto; */
-    margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column-reverse;
+  /* overflow: auto; */
+  margin-bottom: 20px;
 }
 
 .favouritesHeader {
-    padding: 3% 1em 1% 1em;
-    display: flex;
-    width: 100%;
-    align-items: flex-end;
-    justify-content: space-between;
-    font-size: 100%;
-    font-weight: 500;
-    letter-spacing: 0;
-    line-height: 15px;
-    text-align: right;
+  padding: 3% 1em 1% 1em;
+  display: flex;
+  width: 100%;
+  align-items: flex-end;
+  justify-content: space-between;
+  font-size: 100%;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 15px;
+  text-align: right;
 }
 
 .favouritesBody {
-    display: flex;
-    padding: 2% 2em 2% 1%;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 0.15%;
-    background-color: #ffffff19;
-    flex: 1;
+  display: flex;
+  padding: 2% 2em 2% 1%;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.15%;
+  background-color: #ffffff19;
+  flex: 1;
 }
 
 .favPlace {
-    font-size: 120%;
-    font-family: 'RobotoMedium';
-    flex-basis: 30%;
-    cursor: pointer;
+  font-size: 120%;
+  font-family: 'RobotoMedium';
+  flex-basis: 30%;
+  cursor: pointer;
 }
 
 .favIco {
-    flex-basis: 8%;
+  flex-basis: 8%;
 }
 
 .favTemp {
-    font-family: 'RobotoMedium';
-    font-size: 218%;
-    display: flex;
-    flex-basis: 7%;
-    align-items: baseline;
+  font-family: 'RobotoMedium';
+  font-size: 218%;
+  display: flex;
+  flex-basis: 7%;
+  align-items: baseline;
 }
 
 .favTemp span {
-    font-family: 'RobotoRegular';
-    font-size: 65%;
+  font-family: 'RobotoRegular';
+  font-size: 65%;
 }
 
 .favCond {
-    font-size: 134%;
-    flex-basis: 38%;
+  font-size: 134%;
+  flex-basis: 38%;
 }
 
 .favouritesBody:hover {
-    background-color: #ffffff3b;
+  background-color: #ffffff3b;
 }
 
-.favouritesBody:hover>.favPlace {
-    color: var(--yellow);
+.favouritesBody:hover > .favPlace {
+  color: var(--yellow);
 }
 
 .favouritesRemoveAll {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .ReactModal__Overlay.ReactModal__Overlay--after-open {
-    background-color: #00000087 !important;
-    position: fixed !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+  background-color: #00000087 !important;
+  position: fixed !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 .ReactModal__Content.ReactModal__Content--after-open {
-    inset: unset !important;
+  inset: unset !important;
 }
 
 .modalText {
-    color: black;
-    font-size: 1em;
+  color: black;
+  font-size: 1em;
 }
 
 .modalBox {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10%;
 }
 
 .modalButtons {
-    padding-top: 10%;
-    display: flex;
+  padding-top: 10%;
+  display: flex;
 }
 
-.modalButtons>button {
-    height: 2.5em;
-    width: 6.5em;
+.modalButtons > button {
+  height: 2.5em;
+  width: 6.5em;
 }
 
 .modalBtnNo {
-    border: none;
-    outline: none;
-    background-color: transparent;
-    cursor: pointer;
-    color: black;
-    font-family: RobotoMedium;
-    font-size: 1em;
-    border-radius: 2px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  color: black;
+  font-family: RobotoMedium;
+  font-size: 1em;
+  border-radius: 2px;
 }
 
 .modalBtnYes {
-    border: none;
-    outline: none;
-    background-color: #f76b1c;
-    cursor: pointer;
-    color: white;
-    font-family: RobotoRegular;
-    font-size: 1em;
-    border-radius: 2px;
+  border: none;
+  outline: none;
+  background-color: #f76b1c;
+  cursor: pointer;
+  color: white;
+  font-family: RobotoRegular;
+  font-size: 1em;
+  border-radius: 2px;
 }
 
 .noFavAdded {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  z-index: -1;
 }
 
 .noFavText {
-    font-size: 1.5em;
-    margin-top: 1em;
+  font-size: 1.5em;
+  margin-top: 1em;
 }
 
 .favLike {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .mobileHeader {
-    display: none;
+  display: none;
 }
 
 .favouritesBodyDown {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .favouritebodyDownLower {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: space-evenly;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 @media screen and (max-width: 774px) {
-    .mobileHeader {
-        position: fixed;
-        width: 100vw;
-        align-items: center;
-        display: flex;
-        justify-content: center;
-        background-color: white;
-        height: 65px;
-        color: black;
-        font-size: 25px;
-        width: 100%;
-        font-family: 'RobotoMedium';
-    }
-    .favouritesBodyDown {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-    }
-    .favouritebodyDownLower {
-        gap: 12px;
-        justify-content: flex-start;
-        /* justify-content: space-evenly; */
-    }
-    .favIcon>img {
-        width: 45px;
-    }
-    .favTemp {
-        font-size: 1.6em;
-        font-family: 'robotoRegular';
-    }
-    .favCond {
-        font-size: 1em;
-        /* flex-basis: 38%; */
-    }
-    .favPlace {
-        font-family: 'RobotoRegular';
-        color: var(--yellow);
-    }
-    .favouritesHeader {
-        padding: 20px 0em;
-    }
-    .favouritesBody {
-        margin-top: 0.5%;
-        padding: 2% 4%;
-    }
-    .favourites {
-        width: 93vw;
-        margin-bottom: 20px;
-    }
-    .ReactModal__Content.ReactModal__Content--after-open {
-        inset: auto 40px !important;
-        padding: unset !important;
-    }
-    .modalBtnYes {
-        background-color: transparent;
-        color: #673ab7;
-        font-family: 'robotoMedium';
-    }
-    .modalBtnNo {
-        background-color: transparent;
-        color: #673ab7;
-    }
-    .modalText {
-        color: rgba(0, 0, 0, 0.54);
-    }
+  .mobileHeader {
+    position: fixed;
+    width: 100vw;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    height: 65px;
+    color: black;
+    font-size: 25px;
+    width: 100%;
+    font-family: 'RobotoMedium';
+  }
+  .favouritesBodyDown {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .favouritebodyDownLower {
+    gap: 12px;
+    justify-content: flex-start;
+    /* justify-content: space-evenly; */
+  }
+  .favIcon > img {
+    width: 45px;
+  }
+  .favTemp {
+    font-size: 1.6em;
+    font-family: 'robotoRegular';
+  }
+  .favCond {
+    font-size: 1em;
+    /* flex-basis: 38%; */
+  }
+  .favPlace {
+    font-family: 'RobotoRegular';
+    color: var(--yellow);
+  }
+  .favouritesHeader {
+    padding: 20px 0em;
+  }
+  .favouritesBody {
+    margin-top: 0.5%;
+    padding: 2% 4%;
+  }
+  .favourites {
+    width: 93vw;
+    margin-bottom: 20px;
+  }
+  .ReactModal__Content.ReactModal__Content--after-open {
+    inset: auto 40px !important;
+    padding: unset !important;
+  }
+  .modalBtnYes {
+    background-color: transparent;
+    color: #673ab7;
+    font-family: 'robotoMedium';
+  }
+  .modalBtnNo {
+    background-color: transparent;
+    color: #673ab7;
+  }
+  .modalText {
+    color: rgba(0, 0, 0, 0.54);
+  }
 }
