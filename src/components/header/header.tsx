@@ -7,9 +7,9 @@ import { getweather } from '../../redux/reducers/weatherSlice';
 import { currentData } from '../../redux/reducers/currentWeatherSlice';
 import { getLocation } from '../../redux/reducers/locationAuto';
 import { recentAdd } from '../../redux/reducers/recentSlice';
+import { showSugg } from '../../redux/reducers/showSuggestions';
 
 const Header = () => {
-  const [showAutoComplete, setShowAutoComplete] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const [mobilesearch, setMobileSearch] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -20,6 +20,7 @@ const Header = () => {
 
   const weather = useSelector((state: any) => state.weather);
   const locationSuggestion = useSelector((state: any) => state.location);
+  const showSuggestion = useSelector((state: any) => state.showSuggestion);
 
   useEffect(() => {
     dispatch(getweather(localStorage.getItem('location')));
@@ -78,7 +79,6 @@ const Header = () => {
     e.preventDefault();
     if (e.target.search.value.length > 0) {
       dispatch(getweather(e.target.search.value));
-      setShowAutoComplete(false);
     } else {
       alert('Enter place name in search field before submitting ');
     }
@@ -126,7 +126,7 @@ const Header = () => {
           }}
           name="search"
           onFocus={() => {
-            setShowAutoComplete(true);
+            dispatch(showSugg(true));
           }}
           autoComplete="off"
         />
@@ -146,7 +146,7 @@ const Header = () => {
           }}
         />
         <div className="headerAutoComplete">
-          {showAutoComplete &&
+          {showSuggestion &&
             locationSuggestion &&
             locationSuggestion.data &&
             locationSuggestion.data.data &&
@@ -162,7 +162,7 @@ const Header = () => {
                     dispatch(getweather(`${ele.lat},${ele.lon}`));
                     localStorage.setItem('location', `${ele.lat},${ele.lon}`);
                     setSearchValue(ele.name);
-                    setShowAutoComplete(false);
+                    dispatch(showSugg(false));
                     setSubmit(true);
                   }}
                 >

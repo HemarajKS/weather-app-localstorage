@@ -10,6 +10,7 @@ import { tempUnitSlice } from '../reducers/tempUnit';
 import weatherSlice from '../reducers/weatherSlice';
 import favSlice from '../reducers/favSlice';
 import { recentSlice } from '../reducers/recentSlice';
+import { showSuggestionSlice } from '../reducers/showSuggestions';
 
 const reducers = combineReducers({
   weather: weatherSlice.reducer,
@@ -18,6 +19,7 @@ const reducers = combineReducers({
   tempUnit: tempUnitSlice.reducer,
   fav: favSlice.reducer,
   recent: recentSlice.reducer,
+  showSuggestion: showSuggestionSlice.reducer,
 });
 
 const persistConfig = {
