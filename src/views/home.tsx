@@ -6,7 +6,18 @@ import './home.css';
 import HomeBody from '../components/homeBody/homeBody';
 
 const Home = () => {
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const fav = JSON.parse(localStorage.getItem('fav') || '[]');
+    const recent = JSON.parse(localStorage.getItem('recent') || '[]');
+
+    if (JSON.stringify(fav) === '[]') {
+      localStorage.setItem('fav', '[]');
+    }
+    if (JSON.stringify(recent) === '[]') {
+      localStorage.setItem('recent', '[]');
+    }
+    console.log('local Storage Data', fav, recent);
+  }, []);
 
   return (
     <div className="home">
