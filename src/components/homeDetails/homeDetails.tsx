@@ -1,68 +1,28 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import Switch from 'react-switch'
-import { deleteData } from '../../redux/reducers/deleteSlice'
-import { FavouriteData } from '../../redux/reducers/favouriteSlice'
-import { getFavouriteData } from '../../redux/reducers/getFavSlice'
-import './homeDetails.css'
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import Switch from 'react-switch';
+
+import './homeDetails.css';
 
 const HomeDetails = () => {
-  useEffect(() => {
-    dispatch(getFavouriteData())
-  }, [])
-
-  const dispatch = useDispatch()
-  const [checked, setChecked] = useState(true)
-  const [favExist, setfavExist] = useState(false)
-  const [currentkey, setcurrentkey] = useState('')
-  const weather: any = useSelector((state: any) => state.search)
-  const fav: any = useSelector((state: any) => state.getFavourite.data)
-  const favouritePost = useSelector((state: any) => state.Favourite.data)
-
-  useEffect(() => {
-    dispatch(getFavouriteData())
-  }, [weather])
+  const dispatch = useDispatch();
+  const [checked, setChecked] = useState(true);
 
   const handleChange = (nextChecked: boolean) => {
-    setChecked(nextChecked)
-  }
+    setChecked(nextChecked);
+  };
 
-  useEffect(() => {
-    fav && fav.data && whetherLiked()
-    dispatch(getFavouriteData())
-  }, [weather && weather.search && weather, fav && fav.data])
-
-  const whetherLiked = () => {
-    for (var i = 0; i < Object.keys(fav.data).length; i++) {
-      if (fav.data[Object.keys(fav.data)[i]].id === weather.search.id) {
-        setfavExist(true)
-
-        return
-      } else {
-        setfavExist(false)
-      }
-    }
-  }
-
-  useEffect(() => {
-    dispatch(getFavouriteData())
-  }, [favExist, dispatch])
-
-  const [date, setDate] = useState(new Date())
+  const [date, setDate] = useState(new Date());
 
   function refreshClock() {
-    setDate(new Date())
+    setDate(new Date());
   }
   useEffect(() => {
-    const timerId = setInterval(refreshClock, 1000)
+    const timerId = setInterval(refreshClock, 1000);
     return function cleanup() {
-      clearInterval(timerId)
-    }
-  }, [])
-
-  useEffect(() => {
-    dispatch(getFavouriteData())
-  }, [setfavExist])
+      clearInterval(timerId);
+    };
+  }, []);
 
   return (
     <div className="homeBodyContainer">
@@ -87,41 +47,11 @@ const HomeDetails = () => {
             })}
           </span>
         </div>
-        {weather && weather.search && (
-          <div className="homePagePlace">
-            {weather.search.place + ' , ' + weather.search.region}
-          </div>
-        )}
-        {weather && weather.search && (
+        {<div className="homePagePlace">Bailur, Karkala</div>}
+        {
           <>
-            {favExist ? (
-              <div
-                className="homePageFav"
-                onClick={() => {
-                  console.log('remove', weather.search, fav.data)
-                  console.log('removeee', Object.keys(fav.data))
-                  for (var i = 0; i < Object.keys(fav.data).length; i++) {
-                    console.log(
-                      fav.data[Object.keys(fav.data)[i]].id,
-                      weather.search.id,
-                    )
-                    if (
-                      fav.data[Object.keys(fav.data)[i]].id ===
-                      weather.search.id
-                    ) {
-                      setfavExist(false)
-                      console.log('current key', Object.keys(fav.data)[i])
-                      dispatch(
-                        deleteData({
-                          page: 'Favourite',
-                          id: Object.keys(fav.data)[i],
-                        }),
-                      )
-                      return
-                    }
-                  }
-                }}
-              >
+            {true ? (
+              <div className="homePageFav" onClick={() => {}}>
                 <div className="homePageFavIcon">
                   <img
                     src={require('../../assets/icons/icon_favourite_Active.png')}
@@ -134,33 +64,7 @@ const HomeDetails = () => {
                 </div>
               </div>
             ) : (
-              <div
-                className="homePageFav"
-                onClick={() => {
-                  let arr: any = []
-                  dispatch(FavouriteData(weather.search))
-                  console.log('remove', weather.search, fav.data)
-                  console.log('removeee', Object.keys(fav.data))
-                  for (var i = 0; i < Object.keys(fav.data).length; i++) {
-                    console.log(
-                      fav.data[Object.keys(fav.data)[i]].id,
-                      weather.search.id,
-                    )
-                    if (
-                      fav.data[Object.keys(fav.data)[i]].id ===
-                      weather.search.id
-                    ) {
-                      arr.push('exist')
-                      setfavExist(true)
-                      return
-                    }
-                  }
-                  if (arr.includes('exist')) {
-                    alert()
-                  } else {
-                  }
-                }}
-              >
+              <div className="homePageFav" onClick={() => {}}>
                 <div className="homePageFavIcon">
                   <img
                     src={require(`../../assets/icons/icon_favourite.png`)}
@@ -171,22 +75,16 @@ const HomeDetails = () => {
               </div>
             )}
           </>
-        )}
-        {weather && weather.search && (
+        }
+        {
           <div className="homePageWeather">
             <div className="homePageWeatherIcon">
-              <img
-                src={weather.search.icon}
-                alt="Weather"
-                className="homePageWeatherIcon"
-              />
+              <img src="icon" alt="Weather" className="homePageWeatherIcon" />
             </div>
             <div className="homePageWeatherTemperature">
               <div className="homePageWeatherTemp">
                 {' '}
-                {checked
-                  ? weather.search.temp_f.toFixed(0) + '\u00B0'
-                  : weather.search.temp_c.toFixed(0) + '\u00B0'}{' '}
+                {checked ? 0 + '\u00B0' : 0 + '\u00B0'}{' '}
               </div>
               <div className="homePageWeatherUnit">
                 <Switch
@@ -258,14 +156,12 @@ const HomeDetails = () => {
                 />
               </div>
             </div>
-            <div className="homePageWeatherText">
-              {weather.search.condition}
-            </div>
+            <div className="homePageWeatherText">Sunny</div>
           </div>
-        )}
+        }
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default HomeDetails
+export default HomeDetails;

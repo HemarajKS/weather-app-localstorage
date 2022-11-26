@@ -5,8 +5,6 @@ import './recent.css';
 
 import { useNavigate } from 'react-router-dom';
 
-import { FavouriteData } from '../../redux/reducers/favouriteSlice';
-
 const Recent = () => {
   const navigate = useNavigate();
 
