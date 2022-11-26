@@ -20,7 +20,9 @@ const Header = () => {
 
   const weather = useSelector((state: any) => state.weather);
   const locationSuggestion = useSelector((state: any) => state.location);
-  const showSuggestion = useSelector((state: any) => state.showSuggestion);
+  const showSuggestion = useSelector(
+    (state: any) => state.showSuggestion.value
+  );
 
   useEffect(() => {
     dispatch(getweather(localStorage.getItem('location')));
@@ -77,6 +79,7 @@ const Header = () => {
 
   const submitHandler: any = (e: any) => {
     e.preventDefault();
+    dispatch(showSugg(false));
     if (e.target.search.value.length > 0) {
       dispatch(getweather(e.target.search.value));
     } else {
@@ -163,6 +166,7 @@ const Header = () => {
                     localStorage.setItem('location', `${ele.lat},${ele.lon}`);
                     setSearchValue(ele.name);
                     dispatch(showSugg(false));
+
                     setSubmit(true);
                   }}
                 >
