@@ -28,9 +28,17 @@ const Header = () => {
   useEffect(() => {
     submit &&
       weather.data &&
+      weather.data.isSuccess &&
       localStorage.setItem(
         'location',
         `${weather.data.data.location.lat},${weather.data.data.location.lon}`
+      );
+    submit &&
+      weather.data &&
+      dispatch(
+        recentAdd(
+          `${weather.data.data.location.lat},${weather.data.data.location.lon}`
+        )
       );
   }, [weather]);
 
@@ -71,7 +79,6 @@ const Header = () => {
     if (e.target.search.value.length > 0) {
       dispatch(getweather(e.target.search.value));
       setShowAutoComplete(false);
-      dispatch(recentAdd(e.target.search.value));
     } else {
       alert('Enter place name in search field before submitting ');
     }
