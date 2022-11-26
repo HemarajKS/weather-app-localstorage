@@ -95,6 +95,10 @@ img.mobileBack {
 }
 
 @media screen and (max-width: 774px) {
+  .headerLogo > img {
+    padding: 0 6%;
+    width: 100%;
+  }
   .header {
     padding: 24px 0;
   }
@@ -111,7 +115,7 @@ img.mobileBack {
   }
   .menuIcon {
     display: block;
-    padding-right: 2em;
+    /* padding-right: 2em; */
     cursor: pointer;
     z-index: 100;
   }

@@ -1,90 +1,90 @@
 .body {
-    width: 100%;
+  width: 100%;
 }
 
 .bodyTabHeader {
-    width: 100%;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    border-bottom: 1px solid #ffffff41;
-    padding-bottom: 4px;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  border-bottom: 1px solid #ffffff41;
+  padding-bottom: 4px;
 }
 
 .bodyTabLinks {
-    display: flex;
-    align-items: flex-end;
-    gap: 3em;
-    margin-left: 1em;
+  display: flex;
+  align-items: flex-end;
+  gap: 3em;
+  margin-left: 1em;
 }
 
 .bodyTab {
-    font-size: 100%;
-    letter-spacing: 0.5px;
-    line-height: 15px;
+  font-size: 100%;
+  letter-spacing: 0.5px;
+  line-height: 15px;
 }
 
 .bodyTab a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .bodyTabTime {
-    padding-right: 1em;
+  padding-right: 1em;
 }
 
-.bodyTab>.active {
-    color: var(--yellow);
-    border-bottom: 3px solid var(--yellow);
-    padding: 0 1em;
-    margin: 0 -1em;
+.bodyTab > .active {
+  color: var(--yellow);
+  border-bottom: 3px solid var(--yellow);
+  padding: 0 1em;
+  margin: 0 -1em;
 }
 
 @media screen and (max-width: 774px) {
-    .bodyTabLinks {
-        display: none;
-    }
-    .bodyTabHeader {
-        display: none;
-    }
-    /* .body {
+  .bodyTabLinks {
+    display: none;
+  }
+  .bodyTabHeader {
+    display: none;
+  }
+  /* .body {
         width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
         margin-top: 8%;
     } */
-    .HomePage {
-        align-items: center !important;
-    }
-    .bodyTabTime {
-        padding-right: 1em;
-        opacity: 60%;
-        font-size: 94%;
-        letter-spacing: 2px;
-    }
-    .bodyTabTime span {
-        text-transform: uppercase;
-    }
-    .homePagePlace {
-        font-size: 134%;
-    }
-    .homePageFav {
-        margin-bottom: 4em;
-        width: 100vw;
-        justify-content: center;
-    }
-    .homePageWeatherTemp {
-        font-size: 3.5em !important;
-    }
-    .homePageWeatherText {
-        font-size: 1.3em !important;
-        margin-top: 0.8em !important;
-    }
-    .homeBodyContainer {
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-    }
+  .HomePage {
+    align-items: center !important;
+  }
+  .bodyTabTime {
+    padding-right: 1em;
+    opacity: 60%;
+    font-size: 94%;
+    letter-spacing: 2px;
+  }
+  .bodyTabTime span {
+    text-transform: uppercase;
+  }
+  .homePagePlace {
+    font-size: 134%;
+  }
+  .homePageFav {
+    margin-bottom: 2.8em;
+    width: 100vw;
+    justify-content: center;
+  }
+  .homePageWeatherTemp {
+    font-size: 3.5em !important;
+  }
+  .homePageWeatherText {
+    font-size: 1.3em !important;
+    margin-top: 0.8em !important;
+  }
+  .homeBodyContainer {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
 }

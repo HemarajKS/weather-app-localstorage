@@ -1,107 +1,107 @@
 .HomePage {
-    padding: 5% 2%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+  padding: 38px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .homePagePlace {
-    font-family: RobotoMedium;
-    font-size: 170%;
-    padding-bottom: 20px;
+  font-family: RobotoMedium;
+  font-size: 170%;
+  padding-bottom: 20px;
 }
 
 .homePageFav {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
 }
 
 .homePageFavText {
-    font-weight: 500;
-    letter-spacing: 0;
-    line-height: 15px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 15px;
 }
 
 .homePageWeather {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding-top: 2%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-top: 2%;
 }
 
 .react-switch-bg {
-    border: 2px solid white !important;
+  border: 2px solid white !important;
 }
 
 .homePageWeather {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .homePageWeatherTemperature {
-    display: flex;
-    align-items: flex-end;
-    gap: 10px;
-    margin-top: 16px;
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  margin-top: 16px;
 }
 
 .homePageWeatherTemp {
-    font-family: 'RobotoMedium';
-    font-size: 4em;
+  font-family: 'RobotoMedium';
+  font-size: 4em;
 }
 
 .homePageWeatherUnit {
-    margin-bottom: 16px;
+  margin-bottom: 16px;
 }
 
 .homePageWeatherText {
-    font-size: 1.5em;
-    letter-spacing: 0.2px;
+  font-size: 1.5em;
+  letter-spacing: 0.2px;
 }
 
 .HomePagebodyTabTime {
-    display: none;
+  display: none;
 }
 
 .homePageWeatherLoading {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding-top: 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-top: 2%;
 }
 
 .homePageBody {
-    width: 100%;
+  width: 100%;
 }
 
 .HomePagebodyTabTime {
-    padding-right: 1em;
-    opacity: 60%;
-    font-size: 94%;
-    letter-spacing: 2px;
-    margin-bottom: 38px;
+  padding-right: 1em;
+  opacity: 60%;
+  font-size: 94%;
+  letter-spacing: 2px;
+  margin-bottom: 38px;
 }
 
 .HomePagebodyTabTime span {
-    text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 img.homePageWeatherIcon {
-    width: 100px;
+  width: 100px;
 }
 
 @media screen and (max-width: 774px) {
-    .HomePagebodyTabTime {
-        display: block;
-        padding: 0 !important;
-    }
-    .HomePage {
-        padding: 5% 0;
-    }
+  .HomePagebodyTabTime {
+    display: block;
+    padding: 0 !important;
+  }
+  .HomePage {
+    padding: unset;
+  }
 }
