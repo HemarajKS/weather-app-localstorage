@@ -41,9 +41,9 @@ export const recentSlice = createSlice({
       }
       state.value = JSON.parse(localStorage.getItem('recent') || '[]');
     },
-    recentDel: (state, action) => {
-      console.log('recentDel', action.payload);
-      state.value = action.payload;
+    recentDel: (state) => {
+      localStorage.setItem('recent', '[]');
+      state.value = JSON.parse(localStorage.getItem('recent') || '[]');
     },
   },
 });

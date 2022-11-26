@@ -125,6 +125,7 @@ const Header = () => {
           value={searchValue}
           onChange={(e: any) => {
             onChangeHandler(e.target.value);
+            dispatch(showSugg(true));
           }}
           name="search"
           onFocus={() => {

@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { getweather } from '../../redux/reducers/weatherSlice';
+import { recentDel } from '../../redux/reducers/recentSlice';
 
 const Recent = () => {
   const dispatch = useDispatch();
@@ -131,7 +132,14 @@ const Recent = () => {
                 <button className="modalBtnNo" onClick={closeModal}>
                   No
                 </button>
-                <button className="modalBtnYes">Yes</button>
+                <button
+                  className="modalBtnYes"
+                  onClick={() => {
+                    dispatch(recentDel());
+                  }}
+                >
+                  Yes
+                </button>
               </div>
             </div>
           </Modal>
