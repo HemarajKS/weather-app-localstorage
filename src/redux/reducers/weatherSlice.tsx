@@ -21,7 +21,7 @@ export const getweather: any = createAsyncThunk(
         params: { q: arg },
         headers: {
           'X-RapidAPI-Key':
-            '40adfff86amshae63704e562067ap186c63jsnff5b3c3286a4',
+            'af3431978amshc69811be2a6a5cep1e62abjsnbf2a965a707d',
           'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com',
         },
       });

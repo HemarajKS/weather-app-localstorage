@@ -1,78 +1,48 @@
 import React, { useEffect, useState } from 'react';
 import './header.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { getLocation } from '../../redux/reducers/locationAuto';
-import { getweather } from '../../redux/reducers/weatherSlice';
-import currentData, { currentSearch } from '../../redux/reducers/currentData';
-import { recentData } from '../../redux/reducers/recentSlice';
-import { getrecentData } from '../../redux/reducers/getRecentSlice';
-import { getFavouriteData } from '../../redux/reducers/getFavSlice';
+
 import { NavLink, useLocation } from 'react-router-dom';
+import { getweather } from '../../redux/reducers/weatherSlice';
 
 const Header = () => {
-  const [searchValue, setSearchValue] = useState('');
   const [showAutoComplete, setShowAutoComplete] = useState(false);
-  const [Submit, setSubmit] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
   const [mobilesearch, setMobileSearch] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   const dispatch = useDispatch();
-  const location = useSelector((state: any) => state.location);
-  const weather = useSelector((state: any) => state.weather);
-  const currData = useSelector((state: any) => state.search);
-  const getRecent = useSelector((state: any) => state.getrecent.data);
-  const fav = useSelector((state: any) => state.getFavourite.data);
 
   const currPath = useLocation();
 
-  const onChangeHandler = (searchString: string) => {
-    setSearchValue(searchString);
-    dispatch(getLocation(searchString));
-  };
-
-  useEffect(() => {
-    dispatch(getFavouriteData());
-  }, [currData]);
-
-  const data: any = weather &&
-    weather.data &&
-    weather.data.data && {
-      id: `${weather.data.data.location.lat},${weather.data.data.location.lon}`,
-      place: weather.data.data.location.name,
-      region: weather.data.data.location.region,
-      icon: `${weather.data.data.current.condition.icon}`,
-      temp_f: weather.data.data.current.temp_f,
-      temp_c: weather.data.data.current.temp_c,
-      condition: weather.data.data.current.condition.text,
-      temp_min: weather.data.data.current.temp_f - 2,
-      temp_max: weather.data.data.current.temp_f + 2,
-      precep: weather.data.data.current.precip_in,
-      humidity: weather.data.data.current.humidity,
-      wind: weather.data.data.current.wind_mph,
-      visibility: weather.data.data.current.vis_miles,
-      fav: false,
-    };
-
-  useEffect(() => {
-    data && dispatch(currentSearch(data));
-    dispatch(getrecentData());
-  }, [weather]);
+  // const data: any = weather &&
+  //   weather.data &&
+  //   weather.data.data && {
+  //     id: `${weather.data.data.location.lat},${weather.data.data.location.lon}`,
+  //     place: weather.data.data.location.name,
+  //     region: weather.data.data.location.region,
+  //     icon: `${weather.data.data.current.condition.icon}`,
+  //     temp_f: weather.data.data.current.temp_f,
+  //     temp_c: weather.data.data.current.temp_c,
+  //     condition: weather.data.data.current.condition.text,
+  //     temp_min: weather.data.data.current.temp_f - 2,
+  //     temp_max: weather.data.data.current.temp_f + 2,
+  //     precep: weather.data.data.current.precip_in,
+  //     humidity: weather.data.data.current.humidity,
+  //     wind: weather.data.data.current.wind_mph,
+  //     visibility: weather.data.data.current.vis_miles,
+  //     fav: false,
+  //   };
 
   const submitHandler = (e: any) => {
     e.preventDefault();
     dispatch(getweather(e.target.search.value));
     setShowAutoComplete(false);
-    setSubmit(true);
   };
 
-  useEffect(() => {
-    dispatch(getrecentData());
-    console.log('current', currData.search, getRecent.data);
-    dispatch(recentData(currData.search));
-    setSubmit(false);
-  }, [currData]);
-
-  useEffect(() => {}, [getRecent]);
+  const onChangeHandler = (term: string) => {
+    setSearchValue(term);
+  };
 
   return (
     <div className="header">
@@ -128,10 +98,7 @@ const Header = () => {
         />
         <div className="headerAutoComplete">
           {showAutoComplete &&
-            location &&
-            location.data &&
-            location.data.data &&
-            location.data.data.map(
+            [].map(
               (
                 ele: { name: string; region: string; lat: number; lon: number },
                 i: number
@@ -142,7 +109,6 @@ const Header = () => {
                   onClick={() => {
                     dispatch(getweather(`${ele.lat},${ele.lon}`));
                     setShowAutoComplete(false);
-                    setSubmit(true);
                   }}
                 >
                   {ele.name}, {ele.region}

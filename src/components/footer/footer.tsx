@@ -2,11 +2,10 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import './footer.css';
 const Footer = () => {
-  const weather: any = useSelector((state: any) => state.search);
-
+  const weather: any = {};
   return (
     <div className="footer">
-      {weather && weather.search && (
+      {true && (
         <div className="footerBody">
           <div className="footerIcon">
             <img
@@ -18,13 +17,13 @@ const Footer = () => {
           <div className="footerText">
             <div className="footerInfo">Min - Max</div>
             <div className="footerInfoValue">
-              {weather.search.temp_min.toFixed(0) + '\u00B0'}
-              {} - {weather.search.temp_max.toFixed(0) + '\u00B0'}
+              {0 + '\u00B0'}
+              {} - {0 + '\u00B0'}
             </div>
           </div>
         </div>
       )}
-      {weather && weather.search && (
+      {
         <div className="footerBody">
           <div className="footerIcon">
             <img
@@ -34,13 +33,11 @@ const Footer = () => {
           </div>
           <div className="footerText">
             <div className="footerInfo">Precipitation</div>
-            <div className="footerInfoValue">
-              {weather.search.precep.toFixed(0)}%
-            </div>
+            <div className="footerInfoValue">{0}%</div>
           </div>
         </div>
-      )}
-      {weather && weather.search && (
+      }
+      {
         <div className="footerBody">
           <div className="footerIcon">
             <img
@@ -50,13 +47,11 @@ const Footer = () => {
           </div>
           <div className="footerText">
             <div className="footerInfo">Humidity</div>
-            <div className="footerInfoValue">
-              {weather.search.humidity.toFixed(0)}%
-            </div>
+            <div className="footerInfoValue">{0}%</div>
           </div>
         </div>
-      )}
-      {weather && weather.search && (
+      }
+      {
         <div className="footerBody">
           <div className="footerIcon">
             <img
@@ -66,14 +61,11 @@ const Footer = () => {
           </div>
           <div className="footerText">
             <div className="footerInfo">Wind</div>
-            <div className="footerInfoValue">
-              {' '}
-              {weather.search.wind.toFixed(0)} mph
-            </div>
+            <div className="footerInfoValue"> {0} mph</div>
           </div>
         </div>
-      )}
-      {weather && weather.search && (
+      }
+      {
         <div className="footerBody">
           <div className="footerIcon">
             <img
@@ -83,12 +75,10 @@ const Footer = () => {
           </div>
           <div className="footerText">
             <div className="footerInfo">Visibility</div>
-            <div className="footerInfoValue">
-              {weather.search.visibility.toFixed(0)} miles
-            </div>
+            <div className="footerInfoValue">{0} miles</div>
           </div>
         </div>
-      )}
+      }
     </div>
   );
 };
