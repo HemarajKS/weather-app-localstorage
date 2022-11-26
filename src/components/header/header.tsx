@@ -20,8 +20,33 @@ const Header = () => {
   const locationSuggestion = useSelector((state: any) => state.location);
 
   useEffect(() => {
+    const options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0,
+    };
+
+    const local = localStorage.getItem('location');
+    console.log('local', local);
+
+    navigator.geolocation.getCurrentPosition(success, error, options);
+
+    function success(pos: any) {
+      const crd = pos.coords;
+      if (local === null) {
+        localStorage.setItem('location', `${crd.latitude},${crd.longitude}`);
+        dispatch(getweather(`${crd.latitude},${crd.longitude}`));
+      }
+    }
+
+    function error(err: any) {
+      console.warn(`ERROR(${err.code}): ${err.message}`);
+      if (local === null) {
+        localStorage.setItem('location', 'udupi');
+        dispatch(getweather('udupi'));
+      }
+    }
     const location = localStorage.getItem('location');
-    dispatch(getweather(location));
   }, []);
 
   useEffect(() => {
