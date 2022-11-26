@@ -10,8 +10,6 @@ const HomeDetails = () => {
   const weather = useSelector((state: any) => state.weather);
   const tempUnit = useSelector((state: any) => state.tempUnit.value);
 
-  const [checked, setChecked] = useState(true);
-
   const handleChange = (nextChecked: boolean) => {
     dispatch(temp(nextChecked));
   };

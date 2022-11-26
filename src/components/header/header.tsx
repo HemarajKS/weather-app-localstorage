@@ -20,7 +20,7 @@ const Header = () => {
   const locationSuggestion = useSelector((state: any) => state.location);
 
   useEffect(() => {
-    const location = JSON.parse(localStorage.getItem('location') || '"udupi"');
+    const location = localStorage.getItem('location');
     dispatch(getweather(location));
   }, []);
 
@@ -30,12 +30,14 @@ const Header = () => {
 
   const submitHandler = (e: any) => {
     e.preventDefault();
+    localStorage.setItem('location', JSON.stringify(e.target.search.value));
     dispatch(getweather(e.target.search.value));
     setShowAutoComplete(false);
   };
 
   const onChangeHandler = (term: string) => {
     setSearchValue(term);
+    localStorage.setItem('location', term);
     dispatch(getLocation(term));
   };
 
@@ -110,6 +112,8 @@ const Header = () => {
                   className="headerAutoCompleteItems"
                   onClick={() => {
                     dispatch(getweather(`${ele.lat},${ele.lon}`));
+                    localStorage.setItem('location', `${ele.lat},${ele.lon}`);
+                    setSearchValue(ele.name);
                     setShowAutoComplete(false);
                   }}
                 >

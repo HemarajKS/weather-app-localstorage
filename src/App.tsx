@@ -10,18 +10,23 @@ function App() {
     maximumAge: 0,
   };
 
+  const local = localStorage.getItem('location');
+  console.log('local', local);
+
   navigator.geolocation.getCurrentPosition(success, error, options);
 
   function success(pos: any) {
     const crd = pos.coords;
-    localStorage.setItem(
-      'location',
-      JSON.stringify(`${crd.latitude}, ${crd.longitude}`)
-    );
+    if (local === null) {
+      localStorage.setItem('location', `${crd.latitude},${crd.longitude}`);
+    }
   }
 
   function error(err: any) {
     console.warn(`ERROR(${err.code}): ${err.message}`);
+    if (local === null) {
+      localStorage.setItem('location', 'udupi');
+    }
   }
 
   return (
