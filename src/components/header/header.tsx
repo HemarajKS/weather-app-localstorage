@@ -8,11 +8,12 @@ import { currentData } from '../../redux/reducers/currentWeatherSlice';
 import { getLocation } from '../../redux/reducers/locationAuto';
 import { recentAdd } from '../../redux/reducers/recentSlice';
 import { showSugg } from '../../redux/reducers/showSuggestions';
+import { mobileMenu } from '../../redux/reducers/showMobileMenu';
 
 const Header = () => {
   const [searchValue, setSearchValue] = useState('');
   const [mobilesearch, setMobileSearch] = useState(false);
-  const [showMobileMenu, setShowMobileMenu] = useState(false);
+
   const [submit, setSubmit] = useState(false);
 
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ const Header = () => {
   const showSuggestion = useSelector(
     (state: any) => state.showSuggestion.value
   );
+  const showMobileMenu = useSelector((state: any) => state.mobileMenu.value);
 
   useEffect(() => {
     dispatch(getweather(localStorage.getItem('location')));
@@ -96,8 +98,9 @@ const Header = () => {
     <div className="header">
       <div
         className="menuIcon"
-        onClick={() => {
-          setShowMobileMenu(true);
+        onClick={(e) => {
+          e.stopPropagation();
+          dispatch(mobileMenu(true));
         }}
       >
         <img
@@ -194,13 +197,16 @@ const Header = () => {
       </div>
       <aside
         className={!showMobileMenu ? 'mobileMenu hideMobileMenu' : 'mobileMenu'}
+        onClick={(e: any) => {
+          e.stopPropagation();
+        }}
       >
         <div className="mobileMenuLinks">
           <div className="mobileMenuLinksTabs">
             <NavLink
               to="/"
               onClick={() => {
-                setShowMobileMenu(false);
+                dispatch(mobileMenu(false));
               }}
             >
               Home
@@ -210,7 +216,7 @@ const Header = () => {
             <NavLink
               to="/favourites"
               onClick={() => {
-                setShowMobileMenu(false);
+                dispatch(mobileMenu(false));
               }}
             >
               Favourite
@@ -220,7 +226,7 @@ const Header = () => {
             <NavLink
               to="/recent"
               onClick={() => {
-                setShowMobileMenu(false);
+                dispatch(mobileMenu(false));
               }}
             >
               Recent Search

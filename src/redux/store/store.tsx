@@ -11,6 +11,7 @@ import weatherSlice from '../reducers/weatherSlice';
 import favSlice from '../reducers/favSlice';
 import { recentSlice } from '../reducers/recentSlice';
 import { showSuggestionSlice } from '../reducers/showSuggestions';
+import { showMobileMenuSlice } from '../reducers/showMobileMenu';
 
 const reducers = combineReducers({
   weather: weatherSlice.reducer,
@@ -20,12 +21,13 @@ const reducers = combineReducers({
   fav: favSlice.reducer,
   recent: recentSlice.reducer,
   showSuggestion: showSuggestionSlice.reducer,
+  mobileMenu: showMobileMenuSlice.reducer,
 });
 
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['location', 'weather'],
+  blacklist: ['location', 'weather', 'mobileMenu'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
