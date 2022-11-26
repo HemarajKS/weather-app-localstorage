@@ -112,6 +112,9 @@ const Header = () => {
         <img src={require('../../assets/images/logo_web.png')} alt="Logo" />
       </div>
       <form
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
         className={
           mobilesearch ? 'headerSearch showHeaderSearchForm' : 'headerSearch'
         }
@@ -161,7 +164,7 @@ const Header = () => {
                 <div
                   key={i}
                   className="headerAutoCompleteItems"
-                  onClick={() => {
+                  onClick={(e) => {
                     dispatch(getweather(`${ele.lat},${ele.lon}`));
                     localStorage.setItem('location', `${ele.lat},${ele.lon}`);
                     setSearchValue(ele.name);
