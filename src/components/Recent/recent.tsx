@@ -6,6 +6,16 @@ import './recent.css';
 import { useNavigate } from 'react-router-dom';
 
 const Recent = () => {
+  useEffect(() => {
+    const recentData = JSON.parse(localStorage.getItem('recent') || '[]');
+
+    for (let i = 0; i < recentData.length; i++) {
+      console.log('ith recent', recentData[i]);
+    }
+
+    console.log('recentData', recentData);
+  }, []);
+
   const navigate = useNavigate();
 
   const [modalIsOpen, setIsOpen] = React.useState(false);

@@ -12,7 +12,18 @@ export const recentSlice = createSlice({
       console.log('recentAdd', action.payload);
       let recentData = JSON.parse(localStorage.getItem('recent') || '[]');
       console.log('recentData', recentData);
-      if (!recentData.includes(action.payload)) {
+      if (recentData.includes(action.payload)) {
+        const fromIndex = recentData.indexOf(action.payload);
+        const toIndex = recentData.length;
+
+        const element = recentData.splice(fromIndex, 1)[0];
+        console.log(element);
+
+        recentData.splice(toIndex, 0, element);
+
+        console.log(recentData);
+        localStorage.setItem('recent', JSON.stringify(recentData));
+      } else {
         recentData.push(action.payload);
         localStorage.setItem('recent', JSON.stringify(recentData));
       }
