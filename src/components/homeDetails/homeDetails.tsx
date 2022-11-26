@@ -31,7 +31,6 @@ const HomeDetails = () => {
   }, []);
 
   useEffect(() => {
-    console.log('fav', favData, weather.data.data);
     let arr: any = [];
 
     favData.some((ele: any, i: any) => {
@@ -282,7 +281,13 @@ const HomeDetails = () => {
               </>
             ) : (
               <div className="locationNotFound">
-                Searched location not found
+                <img
+                  src={require('../../assets/icons/icon_nothing.png')}
+                  alt="Nothing"
+                />
+                <div className="locationNotFoundMessage">
+                  Searched location not found
+                </div>
               </div>
             )}
           </>

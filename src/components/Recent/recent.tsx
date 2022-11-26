@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
-
 import Modal from 'react-modal';
 import './recent.css';
-
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { getweather } from '../../redux/reducers/weatherSlice';
 import { recentDel } from '../../redux/reducers/recentSlice';
@@ -15,18 +12,6 @@ const Recent = () => {
   const recentData = useSelector((state: any) => state.recent.value);
   const favData = useSelector((state: any) => state.fav.value);
   const tempUnit = useSelector((state: any) => state.tempUnit.value);
-
-  console.log('recent data', recentData);
-
-  useEffect(() => {
-    const recentData = JSON.parse(localStorage.getItem('recent') || '[]');
-
-    for (let i = 0; i < recentData.length; i++) {
-      console.log('ith recent', recentData[i]);
-    }
-
-    console.log('recentData', recentData);
-  }, []);
 
   const navigate = useNavigate();
 
@@ -39,8 +24,6 @@ const Recent = () => {
   function closeModal() {
     setIsOpen(false);
   }
-
-  console.log('recent data', localStorage.getItem('recent'));
 
   return (
     <>
@@ -58,7 +41,6 @@ const Recent = () => {
               let x = false;
               let index: any = null;
               favData.some((ele: any, indexFav: any) => {
-                console.log('ele', ele);
                 if (
                   ele.location.name === (key && key.location.name) &&
                   ele.location.lat === (key && key.location.lat) &&

@@ -1,11 +1,12 @@
 import React from 'react';
 import Footer from '../footer/footer';
 import './homePage.css';
-import { NavLink, Outlet } from 'react-router-dom';
-import Router from '../Router/Router';
+
 import HomeDetails from '../homeDetails/homeDetails';
+import { useSelector } from 'react-redux';
 
 const HomePage = () => {
+  const weather = useSelector((state: any) => state.weather);
   return (
     <div className="homePage">
       <div className="homePageBody">
@@ -13,7 +14,7 @@ const HomePage = () => {
           <HomeDetails />
         </div>
       </div>
-      <Footer />
+      {weather.data && <Footer />}
     </div>
   );
 };
