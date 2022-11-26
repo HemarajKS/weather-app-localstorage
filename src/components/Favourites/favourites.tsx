@@ -4,7 +4,7 @@ import '../../components/Favourites/favpourites.css';
 import Modal from 'react-modal';
 
 import { useLocation, useNavigate } from 'react-router-dom';
-import { favdelAll } from '../../redux/reducers/favSlice';
+import { favdelAll, favouriteDel } from '../../redux/reducers/favSlice';
 
 const Favourites = () => {
   const dispatch = useDispatch();
@@ -77,7 +77,12 @@ const Favourites = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="favLike" onClick={() => {}}>
+                  <div
+                    className="favLike"
+                    onClick={() => {
+                      dispatch(favouriteDel(i));
+                    }}
+                  >
                     <img
                       src={require('../../assets/icons/icon_favourite_Active.png')}
                       alt="fav"

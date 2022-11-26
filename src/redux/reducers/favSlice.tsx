@@ -42,7 +42,10 @@ export const favSlice = createSlice({
       state.value = JSON.parse(localStorage.getItem('fav') || '[]');
     },
     favouriteDel: (state, action) => {
-      state.value = action.payload;
+      let favData = JSON.parse(localStorage.getItem('fav') || '[]');
+      favData.splice(action.payload, 1);
+      localStorage.setItem('fav', JSON.stringify(favData));
+      state.value = JSON.parse(localStorage.getItem('fav') || '[]');
     },
     favdelAll: (state) => {
       localStorage.setItem('fav', '[]');
