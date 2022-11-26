@@ -12,8 +12,23 @@ export const recentSlice = createSlice({
       console.log('recentAdd', action.payload);
       let recentData = JSON.parse(localStorage.getItem('recent') || '[]');
       console.log('recentData', recentData);
-      if (recentData.includes(action.payload)) {
-        const fromIndex = recentData.indexOf(action.payload);
+      let arr: any = [];
+      let index: any = null;
+      recentData.some((ele: any, i: any) => {
+        console.log('ele', ele);
+        if (
+          ele.location.name === action.payload.location.name &&
+          ele.location.lat === action.payload.location.lat &&
+          ele.location.lon === action.payload.location.lon
+        ) {
+          arr.push('exist');
+          index = i;
+        }
+      });
+      console.log('array', arr, index);
+
+      if (arr.includes('exist')) {
+        const fromIndex = index;
         const toIndex = recentData.length;
 
         const element = recentData.splice(fromIndex, 1)[0];

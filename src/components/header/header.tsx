@@ -36,13 +36,8 @@ const Header = () => {
         'location',
         `${weather.data.data.location.lat},${weather.data.data.location.lon}`
       );
-    submit &&
-      weather.data &&
-      dispatch(
-        recentAdd(
-          `${weather.data.data.location.lat},${weather.data.data.location.lon}`
-        )
-      );
+
+    submit && weather.data && dispatch(recentAdd(weather.data.data));
   }, [weather && weather.data]);
 
   useEffect(() => {

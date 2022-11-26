@@ -5,18 +5,17 @@ import './recent.css';
 
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { getrecentweather } from '../../redux/reducers/recentweather';
+import { useDispatch, useSelector } from 'react-redux';
 import { getweather } from '../../redux/reducers/weatherSlice';
 
 const Recent = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     const recentData = JSON.parse(localStorage.getItem('recent') || '[]');
 
     for (let i = 0; i < recentData.length; i++) {
       console.log('ith recent', recentData[i]);
-      dispatch(getrecentweather(recentData[i]));
     }
 
     console.log('recentData', recentData);
