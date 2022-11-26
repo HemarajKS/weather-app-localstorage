@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: any = {
-  value: [],
+  value: localStorage.getItem('recent'),
 };
 
 export const recentSlice = createSlice({

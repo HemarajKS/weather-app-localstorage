@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: any = {
-  value: [],
+  value: localStorage.getItem('fav'),
 };
 
 export const favSlice = createSlice({
@@ -20,4 +20,4 @@ export const favSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const { favouriteAdd, favouriteDel } = favSlice.actions;
 
-export default favSlice.reducer;
+export default favSlice;

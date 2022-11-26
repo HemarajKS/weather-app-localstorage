@@ -6,18 +6,33 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { getweather } from '../../redux/reducers/weatherSlice';
 import { currentData } from '../../redux/reducers/currentWeatherSlice';
 import { getLocation } from '../../redux/reducers/locationAuto';
+import { recentAdd } from '../../redux/reducers/recentSlice';
 
 const Header = () => {
   const [showAutoComplete, setShowAutoComplete] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const [mobilesearch, setMobileSearch] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [submit, setSubmit] = useState(false);
 
   const dispatch = useDispatch();
   const currPath = useLocation();
 
   const weather = useSelector((state: any) => state.weather);
   const locationSuggestion = useSelector((state: any) => state.location);
+
+  useEffect(() => {
+    dispatch(getweather(localStorage.getItem('location')));
+  }, []);
+
+  useEffect(() => {
+    submit &&
+      weather.data &&
+      localStorage.setItem(
+        'location',
+        `${weather.data.data.location.lat},${weather.data.data.location.lon}`
+      );
+  }, [weather]);
 
   useEffect(() => {
     const options = {
@@ -27,7 +42,6 @@ const Header = () => {
     };
 
     const local = localStorage.getItem('location');
-    console.log('local', local);
 
     navigator.geolocation.getCurrentPosition(success, error, options);
 
@@ -46,29 +60,29 @@ const Header = () => {
         dispatch(getweather('udupi'));
       }
     }
-    const location = localStorage.getItem('location');
   }, []);
 
   useEffect(() => {
     dispatch(currentData(weather.data));
   }, [weather]);
 
-  const submitHandler = (e: any) => {
+  const submitHandler: any = (e: any) => {
     e.preventDefault();
-    localStorage.setItem('location', JSON.stringify(e.target.search.value));
-    dispatch(getweather(e.target.search.value));
-    setShowAutoComplete(false);
+    if (e.target.search.value.length > 0) {
+      dispatch(getweather(e.target.search.value));
+      setShowAutoComplete(false);
+      dispatch(recentAdd(e.target.search.value));
+    } else {
+      alert('Enter place name in search field before submitting ');
+    }
+
+    setSubmit(true);
   };
 
   const onChangeHandler = (term: string) => {
     setSearchValue(term);
-    localStorage.setItem('location', term);
     dispatch(getLocation(term));
   };
-
-  useEffect(() => {
-    console.log('location', locationSuggestion);
-  });
 
   return (
     <div className="header">
@@ -91,7 +105,9 @@ const Header = () => {
         className={
           mobilesearch ? 'headerSearch showHeaderSearchForm' : 'headerSearch'
         }
-        onSubmit={submitHandler}
+        onSubmit={(e: any) => {
+          submitHandler(e);
+        }}
       >
         <input
           type="text"
@@ -140,6 +156,7 @@ const Header = () => {
                     localStorage.setItem('location', `${ele.lat},${ele.lon}`);
                     setSearchValue(ele.name);
                     setShowAutoComplete(false);
+                    setSubmit(true);
                   }}
                 >
                   {ele.name}, {ele.region}

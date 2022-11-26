@@ -16,7 +16,6 @@ const Home = () => {
     if (JSON.stringify(recent) === '[]') {
       localStorage.setItem('recent', '[]');
     }
-    console.log('local Storage Data', fav, recent);
   }, []);
 
   return (

@@ -8,18 +8,22 @@ import locationSlice from '../reducers/locationAuto';
 import { tempUnitSlice } from '../reducers/tempUnit';
 
 import weatherSlice from '../reducers/weatherSlice';
+import favSlice from '../reducers/favSlice';
+import { recentSlice } from '../reducers/recentSlice';
 
 const reducers = combineReducers({
   weather: weatherSlice.reducer,
   currentWeather: currentWeatherSlice.reducer,
   location: locationSlice.reducer,
   tempUnit: tempUnitSlice.reducer,
+  fav: favSlice.reducer,
+  recent: recentSlice.reducer,
 });
 
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['location'],
+  blacklist: ['location', 'weather'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

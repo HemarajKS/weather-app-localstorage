@@ -18,6 +18,8 @@ const Recent = () => {
     setIsOpen(false);
   }
 
+  console.log('recent data', localStorage.getItem('recent'));
+
   return (
     <>
       <div className="mobileHeader">Recent Search</div>
