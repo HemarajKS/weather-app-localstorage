@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Switch from 'react-switch';
-import { favouriteAdd } from '../../redux/reducers/favSlice';
+import { favouriteAdd, favouriteDel } from '../../redux/reducers/favSlice';
 import { temp } from '../../redux/reducers/tempUnit';
 
 import './homeDetails.css';
@@ -109,7 +109,33 @@ const HomeDetails = () => {
                 {
                   <>
                     {liked ? (
-                      <div className="homePageFav" onClick={() => {}}>
+                      <div
+                        className="homePageFav"
+                        onClick={() => {
+                          favData.some((ele: any, i: any) => {
+                            console.log('ele', ele);
+                            if (
+                              ele.location.name ===
+                                (weather &&
+                                  weather.data &&
+                                  weather.data.data &&
+                                  weather.data.data.location.name) &&
+                              ele.location.lat ===
+                                (weather &&
+                                  weather.data &&
+                                  weather.data.data &&
+                                  weather.data.data.location.lat) &&
+                              ele.location.lon ===
+                                (weather &&
+                                  weather.data &&
+                                  weather.data.data &&
+                                  weather.data.data.location.lon)
+                            ) {
+                              dispatch(favouriteDel(i));
+                            }
+                          });
+                        }}
+                      >
                         <div className="homePageFavIcon">
                           <img
                             src={require('../../assets/icons/icon_favourite_Active.png')}
