@@ -8,6 +8,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { getweather } from '../../redux/reducers/weatherSlice';
 import { recentDel } from '../../redux/reducers/recentSlice';
+import { favouriteAdd } from '../../redux/reducers/favSlice';
 
 const Recent = () => {
   const dispatch = useDispatch();
@@ -111,7 +112,9 @@ const Recent = () => {
                         alt="fav"
                         width={18}
                         height={18}
-                        onClick={() => {}}
+                        onClick={() => {
+                          dispatch(favouriteAdd(key));
+                        }}
                       />
                     )}
                   </div>
