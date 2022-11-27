@@ -129,10 +129,19 @@ img.mobileBack {
     top: 0;
     left: 0;
     bottom: 0;
-    right: 20%;
+    right: 0;
     z-index: 331;
-    background-color: white;
-    padding: 10% 0 0 10%;
+    background-color: #00000052;
+  }
+  .mobileMenuLinks {
+    background-color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 20%;
+    bottom: 0;
+    padding: 11%;
+
     animation-name: sideBar;
     animation-duration: 0.5s;
   }

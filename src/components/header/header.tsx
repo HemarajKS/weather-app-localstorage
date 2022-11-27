@@ -197,11 +197,13 @@ const Header = () => {
       </div>
       <aside
         className={!showMobileMenu ? 'mobileMenu hideMobileMenu' : 'mobileMenu'}
-        onClick={(e: any) => {
-          e.stopPropagation();
-        }}
       >
-        <div className="mobileMenuLinks">
+        <div
+          className="mobileMenuLinks"
+          onClick={(e: any) => {
+            e.stopPropagation();
+          }}
+        >
           <div className="mobileMenuLinksTabs">
             <NavLink
               to="/"
