@@ -34,7 +34,6 @@ const Header = () => {
   useEffect(() => {
     submit &&
       weather.data &&
-      weather.data.isSuccess &&
       localStorage.setItem(
         'location',
         `${weather.data.data.location.lat},${weather.data.data.location.lon}`
@@ -60,6 +59,8 @@ const Header = () => {
       if (local === null) {
         localStorage.setItem('location', `${crd.latitude},${crd.longitude}`);
         dispatch(getweather(`${crd.latitude},${crd.longitude}`));
+      } else {
+        dispatch(getweather(localStorage.getItem('location')));
       }
     }
 
@@ -68,6 +69,8 @@ const Header = () => {
       if (local === null) {
         localStorage.setItem('location', 'udupi');
         dispatch(getweather('udupi'));
+      } else {
+        dispatch(getweather(localStorage.getItem('location')));
       }
     }
   }, []);
