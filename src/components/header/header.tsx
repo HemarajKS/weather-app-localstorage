@@ -38,13 +38,12 @@ const Header = () => {
 
     navigator.geolocation.getCurrentPosition(success, error, options);
 
-    async function success(pos: any) {
+    function success(pos: any) {
       const crd = pos.coords;
       if (local === null) {
+        const x = `${crd.latitude},${crd.longitude}`;
         localStorage.setItem('location', `${crd.latitude},${crd.longitude}`);
-        dispatch(
-          getweather(localStorage.getItem(`${crd.latitude},${crd.longitude}`))
-        );
+        dispatch(getweather(x));
       } else {
         dispatch(getweather(localStorage.getItem('location')));
       }
