@@ -292,7 +292,12 @@ const HomeDetails = () => {
             )}
           </>
         ) : (
-          'loading'
+          <div className="loadingHome">
+            <img
+              src={require('../../assets/icons/logo_web.png')}
+              alt="loading"
+            />
+          </div>
         )}
       </div>
     </div>

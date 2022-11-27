@@ -118,3 +118,37 @@ img.homePageWeatherIcon {
     padding: unset;
   }
 }
+
+.loadingHome > img {
+  animation: 0.8s ease-in-out loading infinite;
+}
+
+.loadingHome {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 100%;
+}
+@keyframes loading {
+  0% {
+    transform: scale(0.2);
+    transform: rotate(0);
+  }
+  25% {
+    transform: scale(0.5);
+    transform: rotate(90);
+  }
+  50% {
+    transform: scale(1);
+    transform: rotate(180);
+  }
+  75% {
+    transform: scale(0.5);
+    transform: rotate(270);
+  }
+  100% {
+    transform: scale(0.5);
+    transform: rotate(360);
+  }
+}
