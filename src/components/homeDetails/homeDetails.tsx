@@ -111,7 +111,6 @@ const HomeDetails = () => {
                         className="homePageFav"
                         onClick={() => {
                           favData.some((ele: any, i: any) => {
-                            console.log('ele', ele);
                             if (
                               ele.location.name ===
                                 (weather &&
