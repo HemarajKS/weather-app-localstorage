@@ -196,7 +196,11 @@ const Header = () => {
         />
       </div>
       <aside
-        className={!showMobileMenu ? 'mobileMenu hideMobileMenu' : 'mobileMenu'}
+        className={
+          !showMobileMenu
+            ? 'mobileMenu hideMobileMenu'
+            : 'mobileMenu mobileClosing'
+        }
       >
         <div
           className="mobileMenuLinks"
