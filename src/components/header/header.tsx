@@ -195,7 +195,7 @@ const Header = () => {
           className={currPath.pathname !== '/' ? 'invertImage' : ''}
         />
       </div>
-      {showMobileMenu && (
+      {
         <aside
           className={
             !showMobileMenu ? 'mobileMenu hideMobileMenu ' : 'mobileMenu'
@@ -239,7 +239,7 @@ const Header = () => {
             </div>
           </div>
         </aside>
-      )}
+      }
     </div>
   );
 };

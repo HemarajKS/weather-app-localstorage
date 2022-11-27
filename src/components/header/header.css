@@ -162,8 +162,7 @@ img.mobileBack {
     color: #000000 !important;
   }
   .hideMobileMenu {
-    animation-name: sideBarClose;
-    animation-duration: 0.5s;
+    display: none;
   }
   button.headerSearchButton {
     display: none;
