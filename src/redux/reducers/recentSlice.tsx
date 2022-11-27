@@ -14,9 +14,7 @@ export const recentSlice = createSlice({
       let arr: any = [];
       let index: any = null;
       recentData.some((ele: any, i: any) => {
-        console.log('ele', ele);
         if (
-          ele.location.name === action.payload.location.name &&
           ele.location.lat === action.payload.location.lat &&
           ele.location.lon === action.payload.location.lon
         ) {
@@ -24,7 +22,6 @@ export const recentSlice = createSlice({
           index = i;
         }
       });
-      console.log('array', arr, index);
 
       if (arr.includes('exist')) {
         const fromIndex = index;

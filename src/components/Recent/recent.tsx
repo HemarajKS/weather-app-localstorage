@@ -42,7 +42,6 @@ const Recent = () => {
               let index: any = null;
               favData.some((ele: any, indexFav: any) => {
                 if (
-                  ele.location.name === (key && key.location.name) &&
                   ele.location.lat === (key && key.location.lat) &&
                   ele.location.lon === (key && key.location.lon)
                 ) {
