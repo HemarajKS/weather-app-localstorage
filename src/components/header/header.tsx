@@ -28,22 +28,6 @@ const Header = () => {
   const showMobileMenu = useSelector((state: any) => state.mobileMenu.value);
 
   useEffect(() => {
-    dispatch(getweather(localStorage.getItem('location')));
-  }, []);
-
-  useEffect(() => {
-    submit &&
-      weather.data &&
-      localStorage.setItem(
-        'location',
-        `${weather.data.data.location.lat},${weather.data.data.location.lon}`
-      );
-
-    submit && weather.data && dispatch(recentAdd(weather.data.data));
-    setSubmit(false);
-  }, [weather && weather.data]);
-
-  useEffect(() => {
     const options = {
       enableHighAccuracy: true,
       timeout: 5000,
@@ -54,11 +38,13 @@ const Header = () => {
 
     navigator.geolocation.getCurrentPosition(success, error, options);
 
-    function success(pos: any) {
+    async function success(pos: any) {
       const crd = pos.coords;
       if (local === null) {
         localStorage.setItem('location', `${crd.latitude},${crd.longitude}`);
-        dispatch(getweather(`${crd.latitude},${crd.longitude}`));
+        dispatch(
+          getweather(localStorage.getItem(`${crd.latitude},${crd.longitude}`))
+        );
       } else {
         dispatch(getweather(localStorage.getItem('location')));
       }
@@ -74,6 +60,18 @@ const Header = () => {
       }
     }
   }, []);
+
+  useEffect(() => {
+    submit &&
+      weather.data &&
+      localStorage.setItem(
+        'location',
+        `${weather.data.data.location.lat},${weather.data.data.location.lon}`
+      );
+
+    submit && weather.data && dispatch(recentAdd(weather.data.data));
+    setSubmit(false);
+  }, [weather && weather.data]);
 
   useEffect(() => {
     dispatch(currentData(weather.data));
