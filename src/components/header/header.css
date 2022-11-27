@@ -162,7 +162,8 @@ img.mobileBack {
     color: #000000 !important;
   }
   .hideMobileMenu {
-    display: none !important;
+    animation-name: sideBarClose;
+    animation-duration: 0.5s;
   }
   button.headerSearchButton {
     display: none;
@@ -211,6 +212,10 @@ img.mobileBack {
     font-size: 1.2em;
     border-bottom: 0.1px solid #00000030;
     cursor: pointer;
+  }
+  .mobileClosing {
+    animation-name: sideBar;
+    animation-duration: 0.5s;
   }
   @keyframes sideBar {
     from {

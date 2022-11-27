@@ -195,51 +195,51 @@ const Header = () => {
           className={currPath.pathname !== '/' ? 'invertImage' : ''}
         />
       </div>
-      <aside
-        className={
-          !showMobileMenu
-            ? 'mobileMenu hideMobileMenu'
-            : 'mobileMenu mobileClosing'
-        }
-      >
-        <div
-          className="mobileMenuLinks"
-          onClick={(e: any) => {
-            e.stopPropagation();
-          }}
+      {showMobileMenu && (
+        <aside
+          className={
+            !showMobileMenu ? 'mobileMenu hideMobileMenu ' : 'mobileMenu'
+          }
         >
-          <div className="mobileMenuLinksTabs">
-            <NavLink
-              to="/"
-              onClick={() => {
-                dispatch(mobileMenu(false));
-              }}
-            >
-              Home
-            </NavLink>
+          <div
+            className="mobileMenuLinks"
+            onClick={(e: any) => {
+              e.stopPropagation();
+            }}
+          >
+            <div className="mobileMenuLinksTabs">
+              <NavLink
+                to="/"
+                onClick={() => {
+                  dispatch(mobileMenu(false));
+                }}
+              >
+                Home
+              </NavLink>
+            </div>
+            <div className="mobileMenuLinksTabs">
+              <NavLink
+                to="/favourites"
+                onClick={() => {
+                  dispatch(mobileMenu(false));
+                }}
+              >
+                Favourite
+              </NavLink>
+            </div>
+            <div className="mobileMenuLinksTabs">
+              <NavLink
+                to="/recent"
+                onClick={() => {
+                  dispatch(mobileMenu(false));
+                }}
+              >
+                Recent Search
+              </NavLink>
+            </div>
           </div>
-          <div className="mobileMenuLinksTabs">
-            <NavLink
-              to="/favourites"
-              onClick={() => {
-                dispatch(mobileMenu(false));
-              }}
-            >
-              Favourite
-            </NavLink>
-          </div>
-          <div className="mobileMenuLinksTabs">
-            <NavLink
-              to="/recent"
-              onClick={() => {
-                dispatch(mobileMenu(false));
-              }}
-            >
-              Recent Search
-            </NavLink>
-          </div>
-        </div>
-      </aside>
+        </aside>
+      )}
     </div>
   );
 };
