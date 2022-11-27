@@ -5,6 +5,7 @@ import Modal from 'react-modal';
 
 import { useLocation, useNavigate } from 'react-router-dom';
 import { favdelAll, favouriteDel } from '../../redux/reducers/favSlice';
+import { getweather } from '../../redux/reducers/weatherSlice';
 
 const Favourites = () => {
   const dispatch = useDispatch();
@@ -46,6 +47,9 @@ const Favourites = () => {
                     <div
                       className="favPlace"
                       onClick={() => {
+                        dispatch(
+                          getweather(`${key.location.lat},${key.location.lon}`)
+                        );
                         navigate('/');
                       }}
                     >
