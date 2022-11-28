@@ -1,106 +1,104 @@
-import React, { useEffect, useState } from 'react';
-import './header.css';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react'
+import './header.css'
+import { useSelector, useDispatch } from 'react-redux'
 
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { getweather } from '../../redux/reducers/weatherSlice';
-import { currentData } from '../../redux/reducers/currentWeatherSlice';
-import { getLocation } from '../../redux/reducers/locationAuto';
-import { recentAdd } from '../../redux/reducers/recentSlice';
-import { showSugg } from '../../redux/reducers/showSuggestions';
-import { mobileMenu } from '../../redux/reducers/showMobileMenu';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { getweather } from '../../redux/reducers/weatherSlice'
+import { currentData } from '../../redux/reducers/currentWeatherSlice'
+import { getLocation } from '../../redux/reducers/locationAuto'
+import { recentAdd } from '../../redux/reducers/recentSlice'
+import { showSugg } from '../../redux/reducers/showSuggestions'
+import { mobileMenu } from '../../redux/reducers/showMobileMenu'
 
 const Header = () => {
-  const [searchValue, setSearchValue] = useState('');
-  const [mobilesearch, setMobileSearch] = useState(false);
+  const [searchValue, setSearchValue] = useState('')
+  const [mobilesearch, setMobileSearch] = useState(false)
 
-  const [submit, setSubmit] = useState(false);
+  const [submit, setSubmit] = useState(false)
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const currPath = useLocation();
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const currPath = useLocation()
 
-  const weather = useSelector((state: any) => state.weather);
-  const locationSuggestion = useSelector((state: any) => state.location);
-  const showSuggestion = useSelector(
-    (state: any) => state.showSuggestion.value
-  );
-  const showMobileMenu = useSelector((state: any) => state.mobileMenu.value);
+  const weather = useSelector((state: any) => state.weather)
+  const locationSuggestion = useSelector((state: any) => state.location)
+  const showSuggestion = useSelector((state: any) => state.showSuggestion.value)
+  const showMobileMenu = useSelector((state: any) => state.mobileMenu.value)
 
   useEffect(() => {
     const options = {
       enableHighAccuracy: true,
       timeout: 5000,
       maximumAge: 0,
-    };
+    }
 
-    const local = localStorage.getItem('location');
+    const local = localStorage.getItem('location')
 
-    navigator.geolocation.getCurrentPosition(success, error, options);
+    navigator.geolocation.getCurrentPosition(success, error, options)
 
     function success(pos: any) {
-      const crd = pos.coords;
+      const crd = pos.coords
       if (local === null) {
-        const x = `${crd.latitude},${crd.longitude}`;
-        localStorage.setItem('location', `${crd.latitude},${crd.longitude}`);
-        dispatch(getweather(x));
+        const x = `${crd.latitude},${crd.longitude}`
+        localStorage.setItem('location', `${crd.latitude},${crd.longitude}`)
+        dispatch(getweather(x))
       } else {
-        dispatch(getweather(localStorage.getItem('location')));
+        dispatch(getweather(localStorage.getItem('location')))
       }
     }
 
     function error(err: any) {
-      console.warn(`ERROR(${err.code}): ${err.message}`);
+      console.warn(`ERROR(${err.code}): ${err.message}`)
       if (local === null) {
-        localStorage.setItem('location', 'udupi');
-        dispatch(getweather('udupi'));
+        localStorage.setItem('location', 'udupi')
+        dispatch(getweather('udupi'))
       } else {
-        dispatch(getweather(localStorage.getItem('location')));
+        dispatch(getweather(localStorage.getItem('location')))
       }
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
     submit &&
       weather.data &&
       localStorage.setItem(
         'location',
-        `${weather.data.data.location.lat},${weather.data.data.location.lon}`
-      );
+        `${weather.data.data.location.lat},${weather.data.data.location.lon}`,
+      )
 
-    submit && weather.data && dispatch(recentAdd(weather.data.data));
-    setSubmit(false);
-  }, [weather && weather.data]);
+    submit && weather.data && dispatch(recentAdd(weather.data.data))
+    setSubmit(false)
+  }, [weather && weather.data])
 
   useEffect(() => {
-    dispatch(currentData(weather.data));
-  }, [weather]);
+    dispatch(currentData(weather.data))
+  }, [weather])
 
   const submitHandler: any = (e: any) => {
-    e.preventDefault();
-    dispatch(showSugg(false));
-    mobilesearch && navigate('/');
+    e.preventDefault()
+    dispatch(showSugg(false))
+    mobilesearch && navigate('/')
     if (e.target.search.value.length > 0) {
-      dispatch(getweather(e.target.search.value));
+      dispatch(getweather(e.target.search.value))
     } else {
-      alert('Enter place name in search field before submitting ');
+      alert('Enter place name in search field before submitting ')
     }
-    setMobileSearch(false);
-    setSubmit(true);
-  };
+    setMobileSearch(false)
+    setSubmit(true)
+  }
 
   const onChangeHandler = (term: string) => {
-    setSearchValue(term);
-    dispatch(getLocation(term));
-  };
+    setSearchValue(term)
+    dispatch(getLocation(term))
+  }
 
   return (
     <div className="header">
       <div
         className="menuIcon"
         onClick={(e) => {
-          e.stopPropagation();
-          dispatch(mobileMenu(true));
+          e.stopPropagation()
+          dispatch(mobileMenu(true))
         }}
       >
         <img
@@ -110,17 +108,23 @@ const Header = () => {
         />
       </div>
       <div className="headerLogo">
-        <img src={require('../../assets/images/logo_web.png')} alt="Logo" />
+        <img
+          src={require('../../assets/images/logo_web.png')}
+          alt="Logo"
+          onClick={() => {
+            navigate('/')
+          }}
+        />
       </div>
       <form
         onClick={(e) => {
-          e.stopPropagation();
+          e.stopPropagation()
         }}
         className={
           mobilesearch ? 'headerSearch showHeaderSearchForm' : 'headerSearch'
         }
         onSubmit={(e: any) => {
-          submitHandler(e);
+          submitHandler(e)
         }}
       >
         <input
@@ -129,12 +133,12 @@ const Header = () => {
           placeholder="Search city"
           value={searchValue}
           onChange={(e: any) => {
-            onChangeHandler(e.target.value);
-            dispatch(showSugg(true));
+            onChangeHandler(e.target.value)
+            dispatch(showSugg(true))
           }}
           name="search"
           onFocus={() => {
-            dispatch(showSugg(true));
+            dispatch(showSugg(true))
           }}
           autoComplete="off"
         />
@@ -150,7 +154,7 @@ const Header = () => {
           alt="back"
           className="mobileBack"
           onClick={() => {
-            setMobileSearch(false);
+            setMobileSearch(false)
           }}
         />
         <div className="headerAutoComplete">
@@ -161,31 +165,31 @@ const Header = () => {
             locationSuggestion.data.data.map(
               (
                 ele: { name: string; region: string; lat: number; lon: number },
-                i: number
+                i: number,
               ) => (
                 <div
                   key={i}
                   className="headerAutoCompleteItems"
                   onClick={(e) => {
-                    dispatch(getweather(`${ele.lat},${ele.lon}`));
-                    localStorage.setItem('location', `${ele.lat},${ele.lon}`);
-                    setSearchValue(ele.name);
-                    dispatch(showSugg(false));
-                    setSubmit(true);
-                    mobilesearch && navigate('/');
-                    setMobileSearch(false);
+                    dispatch(getweather(`${ele.lat},${ele.lon}`))
+                    localStorage.setItem('location', `${ele.lat},${ele.lon}`)
+                    setSearchValue(ele.name)
+                    dispatch(showSugg(false))
+                    setSubmit(true)
+                    mobilesearch && navigate('/')
+                    setMobileSearch(false)
                   }}
                 >
                   {ele.name}, {ele.region}
                 </div>
-              )
+              ),
             )}
         </div>
       </form>
       <div
         className="mobileSearchIcon"
         onClick={() => {
-          setMobileSearch(!mobilesearch);
+          setMobileSearch(!mobilesearch)
         }}
       >
         {' '}
@@ -204,14 +208,14 @@ const Header = () => {
           <div
             className="mobileMenuLinks"
             onClick={(e: any) => {
-              e.stopPropagation();
+              e.stopPropagation()
             }}
           >
             <div className="mobileMenuLinksTabs">
               <NavLink
                 to="/"
                 onClick={() => {
-                  dispatch(mobileMenu(false));
+                  dispatch(mobileMenu(false))
                 }}
               >
                 Home
@@ -221,7 +225,7 @@ const Header = () => {
               <NavLink
                 to="/favourites"
                 onClick={() => {
-                  dispatch(mobileMenu(false));
+                  dispatch(mobileMenu(false))
                 }}
               >
                 Favourite
@@ -231,7 +235,7 @@ const Header = () => {
               <NavLink
                 to="/recent"
                 onClick={() => {
-                  dispatch(mobileMenu(false));
+                  dispatch(mobileMenu(false))
                 }}
               >
                 Recent Search
@@ -241,7 +245,7 @@ const Header = () => {
         </aside>
       }
     </div>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
