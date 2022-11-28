@@ -50,6 +50,7 @@ const Favourites = () => {
                         dispatch(
                           getweather(`${key.location.lat},${key.location.lon}`)
                         );
+                         localStorage.setItem('location', `${key.location.lat},${key.location.lon}`);
                         navigate('/');
                       }}
                     >

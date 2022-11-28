@@ -1,28 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import Modal from 'react-modal';
-import './recent.css';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { getweather } from '../../redux/reducers/weatherSlice';
-import { recentDel } from '../../redux/reducers/recentSlice';
-import { favouriteAdd, favouriteDel } from '../../redux/reducers/favSlice';
+import React, { useEffect, useState } from 'react'
+import Modal from 'react-modal'
+import './recent.css'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { getweather } from '../../redux/reducers/weatherSlice'
+import { recentDel } from '../../redux/reducers/recentSlice'
+import { favouriteAdd, favouriteDel } from '../../redux/reducers/favSlice'
 
 const Recent = () => {
-  const dispatch = useDispatch();
-  const recentData = useSelector((state: any) => state.recent.value);
-  const favData = useSelector((state: any) => state.fav.value);
-  const tempUnit = useSelector((state: any) => state.tempUnit.value);
+  const dispatch = useDispatch()
+  const recentData = useSelector((state: any) => state.recent.value)
+  const favData = useSelector((state: any) => state.fav.value)
+  const tempUnit = useSelector((state: any) => state.tempUnit.value)
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [modalIsOpen, setIsOpen] = React.useState(false)
 
   function openModal() {
-    setIsOpen(true);
+    setIsOpen(true)
   }
 
   function closeModal() {
-    setIsOpen(false);
+    setIsOpen(false)
   }
 
   return (
@@ -38,17 +38,17 @@ const Recent = () => {
           </div>
           <div className="favourites">
             {recentData.map((key: any, i: any) => {
-              let x = false;
-              let index: any = null;
+              let x = false
+              let index: any = null
               favData.some((ele: any, indexFav: any) => {
                 if (
                   ele.location.lat === (key && key.location.lat) &&
                   ele.location.lon === (key && key.location.lon)
                 ) {
-                  x = true;
-                  index = indexFav;
+                  x = true
+                  index = indexFav
                 }
-              });
+              })
 
               return (
                 <div className="favouritesBody" key={i}>
@@ -57,9 +57,13 @@ const Recent = () => {
                       className="favPlace"
                       onClick={() => {
                         dispatch(
-                          getweather(`${key.location.lat},${key.location.lon}`)
-                        );
-                        navigate('/');
+                          getweather(`${key.location.lat},${key.location.lon}`),
+                        )
+                        localStorage.setItem(
+                          'location',
+                          `${key.location.lat},${key.location.lon}`,
+                        )
+                        navigate('/')
                       }}
                     >
                       {key.location.name}, {key.location.region}
@@ -94,7 +98,7 @@ const Recent = () => {
                         src={require('../../assets/icons/icon_favourite_Active.png')}
                         alt="fav"
                         onClick={() => {
-                          dispatch(favouriteDel(index));
+                          dispatch(favouriteDel(index))
                         }}
                       />
                     ) : (
@@ -104,13 +108,13 @@ const Recent = () => {
                         width={18}
                         height={18}
                         onClick={() => {
-                          dispatch(favouriteAdd(key));
+                          dispatch(favouriteAdd(key))
                         }}
                       />
                     )}
                   </div>
                 </div>
-              );
+              )
             })}
           </div>
           <Modal
@@ -129,7 +133,7 @@ const Recent = () => {
                 <button
                   className="modalBtnYes"
                   onClick={() => {
-                    dispatch(recentDel());
+                    dispatch(recentDel())
                   }}
                 >
                   Yes
@@ -148,7 +152,7 @@ const Recent = () => {
         </div>
       )}
     </>
-  );
-};
+  )
+}
 
-export default Recent;
+export default Recent
