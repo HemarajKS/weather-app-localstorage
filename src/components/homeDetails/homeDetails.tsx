@@ -1,37 +1,37 @@
-import { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import Switch from 'react-switch';
-import { favouriteAdd, favouriteDel } from '../../redux/reducers/favSlice';
-import { temp } from '../../redux/reducers/tempUnit';
+import { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import Switch from 'react-switch'
+import { favouriteAdd, favouriteDel } from '../../redux/reducers/favSlice'
+import { temp } from '../../redux/reducers/tempUnit'
 
-import './homeDetails.css';
+import './homeDetails.css'
 
 const HomeDetails = () => {
-  const [liked, setLiked] = useState(false);
+  const [liked, setLiked] = useState(false)
 
-  const dispatch = useDispatch();
-  const weather = useSelector((state: any) => state.weather);
-  const tempUnit = useSelector((state: any) => state.tempUnit.value);
-  const favData = useSelector((state: any) => state.fav.value);
+  const dispatch = useDispatch()
+  const weather = useSelector((state: any) => state.weather)
+  const tempUnit = useSelector((state: any) => state.tempUnit.value)
+  const favData = useSelector((state: any) => state.fav.value)
 
   const handleChange = (nextChecked: boolean) => {
-    dispatch(temp(nextChecked));
-  };
+    dispatch(temp(nextChecked))
+  }
 
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(new Date())
 
   function refreshClock() {
-    setDate(new Date());
+    setDate(new Date())
   }
   useEffect(() => {
-    const timerId = setInterval(refreshClock, 1000);
+    const timerId = setInterval(refreshClock, 1000)
     return function cleanup() {
-      clearInterval(timerId);
-    };
-  }, []);
+      clearInterval(timerId)
+    }
+  }, [])
 
   useEffect(() => {
-    let arr: any = [];
+    let arr: any = []
 
     favData.some((ele: any, i: any) => {
       if (
@@ -51,16 +51,16 @@ const HomeDetails = () => {
             weather.data.data &&
             weather.data.data.location.lon)
       ) {
-        arr.push('exist');
+        arr.push('exist')
       }
-    });
+    })
 
     if (arr.includes('exist')) {
-      setLiked(true);
+      setLiked(true)
     } else {
-      setLiked(false);
+      setLiked(false)
     }
-  }, [favData, weather]);
+  }, [favData, weather])
 
   return (
     <div className="homeBodyContainer">
@@ -128,9 +128,9 @@ const HomeDetails = () => {
                                   weather.data.data &&
                                   weather.data.data.location.lon)
                             ) {
-                              dispatch(favouriteDel(i));
+                              dispatch(favouriteDel(i))
                             }
-                          });
+                          })
                         }}
                       >
                         <div className="homePageFavIcon">
@@ -151,7 +151,7 @@ const HomeDetails = () => {
                       <div
                         className="homePageFav"
                         onClick={() => {
-                          dispatch(favouriteAdd(weather.data.data));
+                          dispatch(favouriteAdd(weather.data.data))
                         }}
                       >
                         <div className="homePageFavIcon">
@@ -188,14 +188,12 @@ const HomeDetails = () => {
                             weather.data &&
                             weather.data.data &&
                             weather.data.data.current &&
-                            weather.data.data.current.temp_f.toFixed(0) +
-                              '\u00B0'
+                            weather.data.data.current.temp_f.toFixed(0)
                           : weather &&
                             weather.data &&
                             weather.data.data &&
                             weather.data.data.current &&
-                            weather.data.data.current.temp_c.toFixed(0) +
-                              '\u00B0'}{' '}
+                            weather.data.data.current.temp_c.toFixed(0)}
                       </div>
                       <div className="homePageWeatherUnit">
                         <Switch
@@ -299,7 +297,7 @@ const HomeDetails = () => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default HomeDetails;
+export default HomeDetails
